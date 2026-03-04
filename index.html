@@ -8,214 +8,223 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-blue: #003366; /* Bankovní modrá */
+            --primary-blue: #003366;
             --bg-light: #f4f7f9;
             --white: #ffffff;
             --radius: 8px;
-            --shadow: 0 4px 6px rgba(0,0,0,0.05);
-            /* Barvy měsíců */
-            --m1-color: #f1c40f; /* Žlutá */
-            --m2-color: #e67e22; /* Oranžová */
-            --m3-color: #2ecc71; /* Zelená */
-            --m4-color: #3498db; /* Modrá */
+            --m1: #f1c40f; --m2: #e67e22; --m3: #2ecc71; --m4: #3498db;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg-light); color: #333; line-height: 1.6; }
-
-        /* Header */
-        header {
-            background: var(--white);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .logo { font-weight: 700; font-size: 1.2rem; color: var(--primary-blue); border-left: 4px solid var(--primary-blue); padding-left: 10px; }
-        .progress-box { display: flex; align-items: center; gap: 10px; }
-        .progress-circle { width: 40px; height: 40px; border-radius: 50%; border: 4px solid #eee; border-top-color: var(--m3-color); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: bold; }
-
-        /* Hero Section */
-        .hero {
-            padding: 3rem 5%;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, #0055a4 100%);
-            color: white;
-        }
-        .hero h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
-        .milestone-card { background: rgba(255,255,255,0.1); padding: 1rem; border-radius: var(--radius); display: inline-block; margin-top: 1rem; }
-        .btn-main { background: var(--m3-color); color: white; padding: 10px 25px; border-radius: 25px; text-decoration: none; font-weight: 600; display: inline-block; margin-top: 1rem; transition: transform 0.2s; }
-        .btn-main:hover { transform: translateY(-2px); }
-
-        /* Roadmap */
-        .container { max-width: 1100px; margin: 2rem auto; padding: 0 20px; }
-        .roadmap-item { background: var(--white); border-radius: var(--radius); margin-bottom: 1rem; overflow: hidden; box-shadow: var(--shadow); }
-        .month-header { padding: 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 700; border-left: 8px solid #ccc; }
-        .month-1 { border-left-color: var(--m1-color); }
-        .month-2 { border-left-color: var(--m2-color); }
-        .month-3 { border-left-color: var(--m3-color); }
-        .month-4 { border-left-color: var(--m4-color); }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-light); margin: 0; color: #334155; }
+        header { background: var(--white); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        .logo { font-weight: 800; color: var(--primary-blue); border-left: 4px solid var(--primary-blue); padding-left: 10px; }
         
-        .month-content { display: none; padding: 1rem; background: #fafafa; }
-        .week-item { background: white; border: 1px solid #eee; margin-bottom: 10px; border-radius: 6px; padding: 1rem; cursor: pointer; }
-        .week-item:hover { border-color: var(--primary-blue); }
+        .hero { background: linear-gradient(135deg, var(--primary-blue) 0%, #0055a4 100%); color: white; padding: 2rem 5%; }
+        .container { max-width: 1200px; margin: 2rem auto; padding: 0 20px; display: grid; grid-template-columns: 350px 1fr; gap: 2rem; }
 
-        /* Dashboard Detail */
-        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem; }
-        .card { background: white; padding: 1.2rem; border-radius: var(--radius); border: 1px solid #eee; }
-        .card h4 { margin-bottom: 0.8rem; color: var(--primary-blue); border-bottom: 1px solid #eee; padding-bottom: 5px; font-size: 0.9rem; text-transform: uppercase; }
-        .thumb-btn { font-size: 1.5rem; color: #ccc; cursor: pointer; transition: 0.3s; margin-right: 15px; }
-        .thumb-btn.active { color: var(--m3-color); }
+        /* Sidebar - Roadmap */
+        .roadmap-sidebar { height: fit-content; }
+        .month-box { margin-bottom: 1rem; border-radius: var(--radius); overflow: hidden; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .month-header { padding: 12px 15px; cursor: pointer; display: flex; justify-content: space-between; color: white; font-weight: 700; font-size: 0.9rem; }
+        .week-list { padding: 10px; display: none; }
+        .week-list.active { display: block; }
+        .week-btn { width: 100%; text-align: left; padding: 10px; margin-bottom: 5px; border: 1px solid #edf2f7; border-radius: 6px; background: white; cursor: pointer; transition: 0.2s; font-size: 0.85rem; }
+        .week-btn:hover { border-color: var(--primary-blue); background: #f8fafc; }
+        .week-btn.selected { border-left: 4px solid var(--primary-blue); background: #f1f5f9; font-weight: 600; }
 
-        /* Library & Footer */
-        .doc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 2rem 0; }
-        .doc-item { text-align: center; padding: 1.5rem; background: white; border-radius: var(--radius); transition: 0.3s; }
-        .doc-item:hover { background: #eef2f6; }
-        .doc-item i { font-size: 2rem; color: #d32f2f; margin-bottom: 10px; }
+        /* Detail Týdne */
+        .detail-panel { background: white; padding: 2rem; border-radius: var(--radius); box-shadow: 0 4px 6px rgba(0,0,0,0.05); min-height: 600px; }
+        .week-title-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; color: white; font-size: 0.8rem; margin-bottom: 10px; font-weight: 600; }
+        
+        .day-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; margin-top: 2rem; }
+        .day-card { border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px; background: #fafafa; }
+        .day-card h5 { margin: 0 0 10px 0; color: var(--primary-blue); border-bottom: 2px solid #eee; padding-bottom: 5px; font-size: 0.8rem; text-transform: uppercase; }
+        .task { font-size: 0.8rem; margin-bottom: 8px; display: flex; gap: 8px; align-items: flex-start; }
+        .task i { color: #94a3b8; margin-top: 3px; font-size: 0.7rem; }
 
-        footer { background: var(--primary-blue); color: white; padding: 3rem 5%; margin-top: 4rem; display: grid; grid-template-columns: repeat(3, 1fr); }
-        footer h3 { font-size: 1rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
-        footer p, footer a { color: #ccc; font-size: 0.9rem; text-decoration: none; display: block; margin-bottom: 5px; }
+        /* Thumbs */
+        .gatekeeper { margin-top: 3rem; padding: 1.5rem; background: #f1f5f9; border-radius: var(--radius); display: flex; justify-content: space-around; align-items: center; border: 2px dashed #cbd5e1; }
+        .thumb-box { text-align: center; }
+        .thumb-icon { font-size: 1.5rem; color: #cbd5e1; cursor: pointer; transition: 0.3s; }
+        .thumb-icon.active { color: var(--m3); transform: scale(1.2); }
 
-        /* Helpers */
-        .badge { background: #eee; padding: 2px 8px; border-radius: 10px; font-size: 0.7rem; margin-left: 10px; }
+        @media (max-width: 900px) {
+            .container { grid-template-columns: 1fr; }
+            .day-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
 <header>
     <div class="logo">ADAPTAČNÍ PORTÁL 2.0</div>
-    <div class="progress-box">
-        <span>Tvůj progres:</span>
-        <div class="progress-circle">25%</div>
-    </div>
+    <div style="font-size: 0.85rem;"><strong>Bankéř:</strong> Jan Novák <span style="margin-left:15px; color:#64748b">Fáze: ČBA Úvěry</span></div>
 </header>
 
 <section class="hero">
-    <h1 id="greeting">Dobré dopoledne, Jane</h1>
-    <p>Tvůj cíl pro tento týden: <strong>Zvládnutí úvěrové metodiky</strong></p>
-    <div class="milestone-card">
-        <i class="fas fa-flag-checkered"></i> Aktuální milník: Měsíc 1 - Základy bankéře
-    </div>
-    <br>
-    <a href="#" class="btn-main">Pokračovat v učení</a>
+    <h1>Tvůj digitální průvodce</h1>
+    <p>Klikni na týden vlevo pro zobrazení detailního plánu.</p>
 </section>
 
 <div class="container">
-    
-    <div class="roadmap-item">
-        <div class="month-header month-1" onclick="toggleMonth('m1')">
-            <span>MĚSÍC 1: ORIENTACE A SYSTÉMY</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
-        <div id="m1" class="month-content">
-            <div class="week-item" onclick="showDashboard()">
-                <strong>Týden 1:</strong> Vítej v týmu <span class="badge">DOKONČENO</span>
+    <aside class="roadmap-sidebar">
+        <div class="month-box">
+            <div class="month-header" style="background: var(--m1);" onclick="toggleMonth('w1-4')">
+                <span>1. MĚSÍC: ČBA ÚVĚRY</span> <i class="fas fa-chevron-down"></i>
             </div>
-            <div class="week-item" onclick="toggleElement('week-detail')">
-                <strong>Týden 2:</strong> Bankovní systémy a bezpečnost <span class="badge" style="background: var(--m1-color)">AKTUÁLNÍ</span>
-            </div>
-            
-            <div id="week-detail" style="display:none; margin-top: 20px; border-top: 2px dashed #ccc; padding-top: 20px;">
-                <div class="dashboard-grid">
-                    <div class="card">
-                        <h4><i class="fas fa-bullseye"></i> Co mě čeká</h4>
-                        <p style="font-size: 0.85rem;">Pochopení práce v interním CRM, nastavení hesel a první simulace s klientem.</p>
-                    </div>
-                    <div class="card">
-                        <h4><i class="fas fa-graduation-cap"></i> Samostudium</h4>
-                        <p style="font-size: 0.85rem;">• E-learning: Kyberbezpečnost<br>• Video: Jak na vklady</p>
-                    </div>
-                    <div class="card">
-                        <h4><i class="fas fa-book"></i> Pracovní sešit</h4>
-                        <a href="#" style="color: var(--m2-color); font-weight: bold; text-decoration: none;"><i class="fas fa-download"></i> Otevřít sešit (PDF)</a>
-                    </div>
-                    <div class="card">
-                        <h4><i class="fas fa-users"></i> Prezenční den</h4>
-                        <p style="font-size: 0.85rem;"><strong>Centrála, 10:00</strong><br>Workshop: Komunikace</p>
-                    </div>
-                </div>
-
-                <div class="card" style="margin-top: 1rem; text-align: center; background: #f0f4f8;">
-                    <h4><i class="fas fa-check-double"></i> Manažerská validace (Gatekeeper)</h4>
-                    <div style="display: flex; justify-content: center; gap: 30px;">
-                        <div><i class="fas fa-thumbs-up thumb-btn" onclick="toggleThumb(this)"></i><br><small>Bankéř</small></div>
-                        <div><i class="fas fa-thumbs-up thumb-btn" onclick="toggleThumb(this)"></i><br><small>Business Coach</small></div>
-                        <div><i class="fas fa-thumbs-up thumb-btn" onclick="toggleThumb(this)"></i><br><small>Manažer</small></div>
-                    </div>
-                </div>
+            <div id="w1-4" class="week-list active">
+                <button class="week-btn selected" onclick="loadWeek(1, this)">Týden 1: Vítejte v týmu</button>
+                <button class="week-btn" onclick="loadWeek(2, this)">Týden 2: Komunikace a servis</button>
+                <button class="week-btn" onclick="loadWeek(3, this)">Týden 3: Telefonování</button>
+                <button class="week-btn" onclick="loadWeek(4, this)">Týden 4: Poradenství START</button>
             </div>
         </div>
-    </div>
 
-    <div class="roadmap-item">
-        <div class="month-header month-2" onclick="toggleMonth('m2')">
-            <span>MĚSÍC 2: PRODUKTY A PRODEJ</span>
-            <i class="fas fa-chevron-down"></i>
+        <div class="month-box">
+            <div class="month-header" style="background: var(--m2);" onclick="toggleMonth('w5-8')">
+                <span>2. MĚSÍC: ČBA POJIŠTĚNÍ</span> <i class="fas fa-chevron-down"></i>
+            </div>
+            <div id="w5-8" class="week-list">
+                <button class="week-btn" onclick="loadWeek(5, this)">Týden 5: Úvod do úvěrů</button>
+                <button class="week-btn" onclick="loadWeek(6, this)">Týden 6: Index Úvěry 1</button>
+                <button class="week-btn" onclick="loadWeek(7, this)">Týden 7: Bydlení</button>
+                <button class="week-btn" onclick="loadWeek(8, this)">Týden 8: Pojištění život</button>
+            </div>
         </div>
-        <div id="m2" class="month-content">Obsah pro druhý měsíc se připravuje...</div>
-    </div>
 
-    <div class="roadmap-item">
-        <div class="month-header month-3" onclick="toggleMonth('m3')">
-            <span>MĚSÍC 3: EXPERTNÍ DOVEDNOSTI</span>
-            <i class="fas fa-chevron-down"></i>
+        <div class="month-box">
+            <div class="month-header" style="background: var(--m3);" onclick="toggleMonth('w9-12')">
+                <span>3. MĚSÍC: ČBA INVESTICE</span> <i class="fas fa-chevron-down"></i>
+            </div>
+            <div id="w9-12" class="week-list">
+                <button class="week-btn" onclick="loadWeek(9, this)">Týden 9: Úvod pojištění</button>
+                <button class="week-btn" onclick="loadWeek(10, this)">Týden 10: Neživotní poj.</button>
+                <button class="week-btn" onclick="loadWeek(11, this)">Týden 11: Budoucnost</button>
+                <button class="week-btn" onclick="loadWeek(12, this)">Týden 12: Komplet</button>
+            </div>
         </div>
-        <div id="m3" class="month-content">Obsah pro třetí měsíc se připravuje...</div>
-    </div>
 
-    <h3 style="margin-top: 3rem; border-left: 4px solid var(--primary-blue); padding-left: 10px;">Knihovna dokumentů</h3>
-    <div class="doc-grid">
-        <div class="doc-item"><i class="fas fa-file-pdf"></i><br><small>Index 2024</small></div>
-        <div class="doc-item"><i class="fas fa-file-word"></i><br><small>Metodika úvěry</small></div>
-        <div class="doc-item"><i class="fas fa-file-pdf"></i><br><small>Etický kodex</small></div>
-        <div class="doc-item"><i class="fas fa-calendar-alt"></i><br><small>Plán školení</small></div>
-    </div>
+        <div class="month-box">
+            <div class="month-header" style="background: var(--m4);" onclick="toggleMonth('w13-16')">
+                <span>4. MĚSÍC: ZKOUŠKY</span> <i class="fas fa-chevron-down"></i>
+            </div>
+            <div id="w13-16" class="week-list">
+                <button class="week-btn" onclick="loadWeek(13, this)">Týden 13: Triáda 2</button>
+                <button class="week-btn" onclick="loadWeek(14, this)">Týden 14: Zkouška FB 1.0</button>
+                <button class="week-btn" onclick="loadWeek(15, this)">Týden 15: Otevřená hodinka</button>
+                <button class="week-btn" onclick="loadWeek(16, this)">Týden 16: Start Q2 - Plán 30%</button>
+            </div>
+        </div>
+    </aside>
 
+    <main class="detail-panel" id="detail-panel">
+        <div id="week-header-content">
+            <span class="week-title-badge" style="background: var(--m1);">Aktuální týden</span>
+            <h2 id="main-title">Týden 1: Vítejte v týmu</h2>
+            <p id="main-desc">Zaměření: Orientace na pobočce, první kroky v systémech.</p>
+        </div>
+
+        <div class="day-grid" id="day-grid">
+            </div>
+
+        <div class="gatekeeper">
+            <div style="font-weight: 700; color: var(--primary-blue);">POTVRZENÍ TÝDNE:</div>
+            <div class="thumb-box"><i class="fas fa-thumbs-up thumb-icon" onclick="toggleThumb(this)"></i><br><small>Bankéř</small></div>
+            <div class="thumb-box"><i class="fas fa-thumbs-up thumb-icon" onclick="toggleThumb(this)"></i><br><small>Coach</small></div>
+            <div class="thumb-box"><i class="fas fa-thumbs-up thumb-icon" onclick="toggleThumb(this)"></i><br><small>Manažer</small></div>
+        </div>
+    </main>
 </div>
 
-<footer>
-    <div>
-        <h3>Podpora</h3>
-        <p>Lektor: marian.novak@banka.cz</p>
-        <p>IT Helpdesk: klapka 5555</p>
-    </div>
-    <div>
-        <h3>Rychlé odkazy</h3>
-        <a href="#">Často kladené dotazy (FAQ)</a>
-        <a href="#">Intranet - HR sekce</a>
-        <a href="#">Rezervace Triád</a>
-    </div>
-    <div>
-        <h3>Adaptační portál 2.0</h3>
-        <p>© 2026 Interní vzdělávání</p>
-    </div>
-</footer>
-
 <script>
+    const data = {
+        1: { title: "Vítejte v týmu", desc: "Zahájení adaptace a první kroky v týmu.", days: [
+            ["Příprava modulů", "Index Digigram 1"], ["Stínování", "Triáda 1"], ["Prezenční den", "Vítejte v ČS"], ["Follow up aktivity", "Stínování"], ["ČBA certifikace", "Uzavření týdne"]
+        ], color: "var(--m1)" },
+        2: { title: "Komunikace a servis", desc: "Zaměření na klientský servis a Index Poradenství 1.", days: [
+            ["Index Poradenství 1", "Příprava"], ["Tvorba sešitu"], ["Ověřovací webinář"], ["Fyzický den", "Příchozí klient"], ["Follow up", "Pobočka"]
+        ], color: "var(--m1)" },
+        3: { title: "Telefonování", desc: "Aktivní oslovování klientů a metodika volání.", days: [
+            ["Index Telefonování"], ["Tvorba sešitu"], ["Ověřovací webinář"], ["Fyzický den", "Telefonování"], ["Follow up", "Pobočka"]
+        ], color: "var(--m1)" },
+        4: { title: "Poradenství START", desc: "První komplexní schůzky a rozpočet.", days: [
+            ["Index Rozpočet", "Rezerva"], ["Tvorba sešitu"], ["Ověřovací webinář"], ["Fyzický den", "START"], ["Follow up", "Pobočka"]
+        ], color: "var(--m1)" },
+        5: { title: "Úvod do úvěrů", desc: "Start druhé fáze: ČBA Úvěry.", days: [
+            ["Příprava modulů"], ["Stínování"], ["Webinář Úvěry"], ["Fyzický den Úvěry"], ["Test znalostí"]
+        ], color: "var(--m2)" },
+        6: { title: "Index Úvěry 1", desc: "Detailní metodika úvěrových produktů.", days: [
+            ["Index Úvěry 1"], ["Tvorba sešitu"], ["Webinář"], ["Fyzický den Úvěry"], ["Pobočka"]
+        ], color: "var(--m2)" },
+        7: { title: "Bydlení", desc: "Hypotéky a financování potřeb klienta.", days: [
+            ["Index Bydlení"], ["Tvorba sešitu"], ["Webinář"], ["Fyzický den Bydlení"], ["Pobočka"]
+        ], color: "var(--m2)" },
+        8: { title: "Pojištění život", desc: "Zajištění rizik a životní pojištění.", days: [
+            ["Index Pojištění 1"], ["Tvorba sešitu"], ["Webinář"], ["Fyzický den Život"], ["Pobočka"]
+        ], color: "var(--m2)" },
+        9: { title: "Úvod pojištění", desc: "Třetí fáze: ČBA Pojištění.", days: [
+            ["Moduly Pojištění"], ["Stínování"], ["Webinář"], ["Fyzický den"], ["Pobočka"]
+        ], color: "var(--m3)" },
+        10: { title: "Neživotní poj.", desc: "Auta, majetek a odpovědnost.", days: [
+            ["Index Neživot"], ["Tvorba sešitu"], ["Webinář"], ["Fyzický den Neživot"], ["Pobočka"]
+        ], color: "var(--m3)" },
+        11: { title: "Budoucnost", desc: "Investice a penzijní produkty.", days: [
+            ["Index Budoucnost"], ["Tvorba sešitu"], ["Webinář"], ["Fyzický den Budoucnost"], ["Pobočka"]
+        ], color: "var(--m3)" },
+        12: { title: "Komplet", desc: "Komplexní poradenství napříč produkty.", days: [
+            ["Příprava Komplet"], ["Tvorba sešitu"], ["Webinář"], ["Fyzický den Komplet"], ["Pobočka"]
+        ], color: "var(--m3)" },
+        13: { title: "Triáda 2", desc: "Zpětná vazba před finální zkouškou.", days: [
+            ["Příprava Triáda"], ["Triáda 2"], ["Konzultace"], ["Příprava na zkoušku"], ["Pobočka"]
+        ], color: "var(--m4)" },
+        14: { title: "Zkouška FB 1.0", desc: "Certifikace Future Banker 1.0.", days: [
+            ["Opakování"], ["Zkouška FB 1.0"], ["Vyhodnocení"], ["Pobočka"], ["Pobočka"]
+        ], color: "var(--m4)" },
+        15: { title: "Otevřená hodinka", desc: "Konzultace s Business Coachem.", days: [
+            ["Indexy"], ["Otevřená hodinka"], ["Sdílecí webinář"], ["Pobočka"], ["Pobočka"]
+        ], color: "var(--m4)" },
+        16: { title: "Start Q2", desc: "Plné zapojení do obchodního plánu.", days: [
+            ["Plánování Q2"], ["Pobočka"], ["Pobočka"], ["Pobočka"], ["Start - plán 30%"]
+        ], color: "var(--m4)" }
+    };
+
+    function loadWeek(num, btn) {
+        const week = data[num];
+        document.getElementById('main-title').innerText = `Týden ${num}: ${week.title}`;
+        document.getElementById('main-desc').innerText = `Zaměření: ${week.desc}`;
+        
+        const badge = document.querySelector('.week-title-badge');
+        badge.style.background = week.color;
+        badge.innerText = num <= 4 ? "1. Měsíc" : num <= 8 ? "2. Měsíc" : num <= 12 ? "3. Měsíc" : "4. Měsíc";
+
+        const grid = document.getElementById('day-grid');
+        grid.innerHTML = '';
+        const daysLabel = ["Pondělí", "Úterý", "Středa", "Čtvrtek", "Pátek"];
+        
+        week.days.forEach((tasks, i) => {
+            let html = `<div class="day-card"><h5>${daysLabel[i]}</h5>`;
+            tasks.forEach(t => {
+                html += `<div class="task"><i class="fas fa-check-circle"></i> ${t}</div>`;
+            });
+            html += `</div>`;
+            grid.innerHTML += html;
+        });
+
+        document.querySelectorAll('.week-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+    }
+
     function toggleMonth(id) {
         const el = document.getElementById(id);
-        el.style.display = el.style.display === 'block' ? 'none' : 'block';
+        el.classList.toggle('active');
     }
 
-    function toggleElement(id) {
-        const el = document.getElementById(id);
-        el.style.display = el.style.display === 'block' ? 'none' : 'block';
+    function toggleThumb(el) {
+        el.classList.toggle('active');
     }
 
-    function toggleThumb(btn) {
-        btn.classList.toggle('active');
-    }
-
-    // Dynamický pozdrav podle času
-    const hours = new Date().getHours();
-    const greeting = document.getElementById('greeting');
-    if (hours < 12) greeting.innerText = "Dobré dopoledne, Jane";
-    else if (hours < 18) greeting.innerText = "Dobré odpoledne, Jane";
-    else greeting.innerText = "Dobrý večer, Jane";
+    // Default load
+    loadWeek(1, document.querySelector('.week-btn'));
 </script>
 
 </body>
