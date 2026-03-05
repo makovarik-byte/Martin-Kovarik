@@ -10,37 +10,30 @@
         :root {
             --george-blue: #00497A;
             --george-light: #00A1DE;
-            --m1-color: #f1c40f; /* Žlutá */
-            --m2-color: #e67e22; /* Oranžová */
-            --m3-color: #2ecc71; /* Zelená */
-            --m4-color: #3498db; /* Modrá */
-            --bg: #F2F5F7;
-            --white: #ffffff;
-            --radius: 12px;
+            --m1-color: #f1c40f; --m2-color: #e67e22; --m3-color: #2ecc71; --m4-color: #3498db;
+            --bg: #F2F5F7; --white: #ffffff; --radius: 12px;
             --shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 
         body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: #333; margin: 0; scroll-behavior: smooth; }
         
-        /* Header & Progress */
         header { 
             background: var(--white); padding: 15px 5%; display: flex; justify-content: space-between; 
             align-items: center; border-bottom: 1px solid #D1D8DD; position: sticky; top: 0; z-index: 1000;
         }
         .progress-wrapper { display: flex; align-items: center; gap: 15px; }
         .bar-bg { width: 150px; height: 8px; background: #eee; border-radius: 4px; overflow: hidden; }
-        .bar-fill { height: 100%; background: var(--george-light); width: 18%; transition: 0.5s; }
+        .bar-fill { height: 100%; background: var(--george-light); transition: 0.5s; }
 
-        .container { max-width: 1400px; margin: 30px auto; padding: 0 20px; display: grid; grid-template-columns: 300px 1fr; gap: 30px; }
+        .container { max-width: 1400px; margin: 30px auto; padding: 0 20px; display: grid; grid-template-columns: 280px 1fr; gap: 30px; }
 
         /* Sidebar Navigation */
         .sidebar { display: flex; flex-direction: column; gap: 15px; }
         .month-card { background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border-top: 5px solid #ccc; }
-        .month-title { padding: 12px 15px; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #666; background: #fafafa; }
-        .week-list { padding: 8px; }
+        .month-title { padding: 12px 15px; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; color: #666; background: #fafafa; }
         .week-item { 
-            display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; 
-            text-decoration: none; color: #444; font-size: 0.9rem; border-radius: 8px; margin-bottom: 4px; transition: 0.2s;
+            display: flex; align-items: center; justify-content: space-between; padding: 10px 15px; 
+            text-decoration: none; color: #444; font-size: 0.9rem; border-bottom: 1px solid #f0f0f0; transition: 0.2s;
         }
         .week-item:hover { background: #f0f7ff; color: var(--george-blue); }
         .week-item.active { background: var(--george-blue); color: white; font-weight: 600; }
@@ -49,112 +42,123 @@
         .week-item.active .status-dot { background: white; }
         .week-item.completed .status-dot { background: #2ecc71; }
 
-        /* Main Content */
-        .main-stage { display: flex; flex-direction: column; gap: 20px; }
+        /* Main Dashboard */
         .dashboard-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-        .card { background: var(--white); border-radius: var(--radius); padding: 25px; box-shadow: var(--shadow); border: 1px solid rgba(0,0,0,0.03); }
-        .card-h { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; font-weight: 700; color: var(--george-blue); }
+        .card { background: var(--white); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); border: 1px solid rgba(0,0,0,0.02); }
+        .card-h { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-weight: 700; color: var(--george-blue); font-size: 0.95rem; }
+        .card-h i { color: var(--george-light); width: 20px; }
         
-        /* Triáda & Special Cards */
-        .triad-card { grid-column: span 2; background: linear-gradient(90deg, #00497A 0%, #00A1DE 100%); color: white; border: none; }
+        /* Triáda Special */
+        .triad-card { grid-column: span 2; background: linear-gradient(90deg, #00497A 0%, #00A1DE 100%); color: white; border: none; margin-bottom: 10px; }
         .triad-card .card-h { color: white; }
-        
-        /* Buttons */
-        .btn-blue { background: var(--george-blue); color: white; padding: 12px; border-radius: 8px; border: none; cursor: pointer; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; }
-        .btn-blue:hover { opacity: 0.9; }
-        .note-box { background: #fff9db; padding: 12px; border-radius: 8px; font-size: 0.85rem; border-left: 4px solid #f1c40f; margin-top: 10px; }
 
-        /* Manager Thumbs */
-        .thumbs-row { display: flex; gap: 15px; margin-top: 15px; }
-        .thumb-unit { flex: 1; padding: 15px; border-radius: 10px; background: #f8fafc; border: 1px solid #e2e8f0; text-align: center; cursor: pointer; }
+        /* Buttons & Thumbs */
+        .btn-blue { background: var(--george-blue); color: white; padding: 10px; border-radius: 8px; border: none; cursor: pointer; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; font-size: 0.85rem; }
+        .note-box { background: #fff9db; padding: 10px; border-radius: 8px; font-size: 0.8rem; border-left: 4px solid #f1c40f; margin-top: 10px; }
+        .thumbs-row { display: flex; gap: 10px; margin-top: 10px; }
+        .thumb-unit { flex: 1; padding: 10px; border-radius: 8px; background: #f8fafc; border: 1px solid #e2e8f0; text-align: center; cursor: pointer; font-size: 0.75rem; }
         .thumb-unit.active { background: #ecfdf5; border-color: #10b981; color: #059669; }
-        .thumb-unit i { font-size: 1.4rem; margin-bottom: 5px; }
 
-        footer { background: var(--white); padding: 40px 5%; margin-top: 60px; border-top: 1px solid #ddd; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        footer { background: var(--white); padding: 30px 5%; margin-top: 50px; border-top: 1px solid #ddd; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .footer-col h4 { color: var(--george-blue); font-size: 0.9rem; margin-bottom: 10px; }
+        .footer-col p { font-size: 0.8rem; color: #666; margin: 3px 0; }
     </style>
 </head>
 <body>
 
 <header>
-    <div style="font-weight: 800; color: var(--george-blue); font-size: 1.2rem;">ADAPTAČNÍ PORTÁL 2.0</div>
+    <div style="font-weight: 800; color: var(--george-blue); font-size: 1.1rem;">BANKA | ADAPTAČNÍ PORTÁL 2.0</div>
     <div class="progress-wrapper">
-        <span style="font-size: 0.8rem; font-weight: 600;">CELKOVÝ PROGRES</span>
-        <div class="bar-bg"><div id="main-progress" class="bar-fill"></div></div>
-        <span id="progress-text" style="font-size: 0.8rem; font-weight: 700;">18%</span>
+        <span style="font-size: 0.75rem; font-weight: 600;">TVŮJ PROGRES</span>
+        <div class="bar-bg"><div id="main-progress" class="bar-fill" style="width: 18%;"></div></div>
+        <span id="progress-text" style="font-size: 0.75rem; font-weight: 700;">18%</span>
     </div>
 </header>
 
 <div class="container">
-    <aside class="sidebar">
-        <div id="sidebar-nav"></div>
-    </aside>
+    <aside class="sidebar" id="sidebar-nav"></aside>
 
     <main class="main-stage">
-        <div id="dynamic-content">
-            </div>
+        <div id="dynamic-content"></div>
 
-        <div class="card sub-section">
-            <div class="card-h"><i class="fas fa-folder-open"></i> Knihovna dokumentů</div>
-            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;">
-                <div style="text-align: center;"><i class="fas fa-file-pdf" style="color: #e74c3c; font-size: 2rem;"></i><br><small>Metodika Úvěry</small></div>
-                <div style="text-align: center;"><i class="fas fa-file-pdf" style="color: #e74c3c; font-size: 2rem;"></i><br><small>Etický kodex</small></div>
-                <div style="text-align: center;"><i class="fas fa-file-word" style="color: #3498db; font-size: 2rem;"></i><br><small>Pracovní sešit (Master)</small></div>
-                <div style="text-align: center;"><i class="fas fa-file-excel" style="color: #27ae60; font-size: 2rem;"></i><br><small>Reporting</small></div>
+        <div class="card" style="margin-top: 30px; background: #f8fafc;">
+            <div class="card-h"><i class="fas fa-folder-open"></i> Knihovna dokumentů a kontaktů</div>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; text-align: center;">
+                <div><i class="fas fa-file-pdf" style="color: #e74c3c; font-size: 1.5rem;"></i><br><small>Metodika Úvěry</small></div>
+                <div><i class="fas fa-file-word" style="color: #3498db; font-size: 1.5rem;"></i><br><small>Pracovní sešit</small></div>
+                <div><i class="fas fa-video" style="color: var(--george-light); font-size: 1.5rem;"></i><br><small>Video manuály</small></div>
+                <div><i class="fas fa-user-headset" style="color: var(--george-blue); font-size: 1.5rem;"></i><br><small>IT Podpora</small></div>
             </div>
         </div>
     </main>
 </div>
 
 <footer id="footer-contacts">
-    </footer>
+    <div class="footer-col">
+        <h4>Tým adaptace</h4>
+        <p>Bc. Jana Moudrá - Vedoucí coach</p>
+        <p>Ing. Petr Rychlý - Metodik</p>
+    </div>
+    <div class="footer-col">
+        <h4>Důležité kontakty</h4>
+        <p>HR Servis: 800 123 456</p>
+        <p>IT Helpdesk: 222 111 000</p>
+    </div>
+    <div class="footer-col">
+        <h4>Odkazy</h4>
+        <p><a href="#" style="color: var(--george-light);">Vnitřní předpisy</a></p>
+        <p><a href="#" style="color: var(--george-light);">George Design System</a></p>
+    </div>
+</footer>
 
 <script>
     const weeksData = {
-        1: { m: 1, title: "Vítejte v týmu", desc: "Orientace, systémy a první stínování.", hasSesit: true, hasTriada: true },
-        2: { m: 1, title: "Komunikační standardy", desc: "Jak mluvit s klientem v George stylu.", hasSesit: true },
-        3: { m: 1, title: "Práce s daty", desc: "Základy CRM a klientských karet.", hasSesit: false },
-        4: { m: 1, title: "Základy produktů", desc: "Přehled portfolia pro nováčky.", hasSesit: false },
-        5: { m: 2, title: "ČBA Úvěry I.", desc: "Metodika spotřebitelských úvěrů.", hasSesit: false },
-        6: { m: 2, title: "ČBA Úvěry II.", desc: "Schvalovací proces a risk.", hasSesit: false },
-        7: { m: 2, title: "Bydlení", desc: "Úvod do hypoték a zajištění.", hasSesit: false },
-        8: { m: 2, title: "Pojištění k úvěrům", desc: "Ochrana schopnosti splácet.", hasSesit: false },
-        9: { m: 3, title: "ČBA Investice", desc: "Fondy a investiční dotazník.", hasSesit: false },
-        10: { m: 3, title: "Důchodové spoření", desc: "Příprava na stáří a penze.", hasSesit: false },
-        11: { m: 3, title: "Pojištění majetku", desc: "Auta, domy a odpovědnost.", hasSesit: false },
-        12: { m: 3, title: "Triáda - Vyhodnocení", desc: "Velké ověření dovedností.", hasSesit: false, hasTriada: true },
-        13: { m: 4, title: "Future Banker 1.0", desc: "Příprava na závěrečnou zkoušku.", hasSesit: false },
-        14: { m: 4, title: "Certifikační týden", desc: "Ostré testy a certifikace.", hasSesit: false },
-        15: { m: 4, title: "Otevřená hodinka", desc: "Sdílení zkušeností s TL.", hasSesit: false },
-        16: { m: 4, title: "Start Q2", desc: "Vstup do ostrého plánu 30%.", hasSesit: false }
+        1: { m: 1, title: "Vítejte v týmu", desc: "První kroky na pobočce a smlouva adaptace.", 
+             cekame: "Choreo pobočky, podpis smlouvy o adaptaci, stínování zkušených kolegů v provozu.",
+             studium: "Finanční gramotnost, Digi gramotnost (Modul 1-3).", 
+             hasSesit: true, hasTriada: true },
+        2: { m: 1, title: "Standardy servisu", desc: "Jak děláme bankovnictví pro lidi.", 
+             cekame: "Pochopení principů klientského servisu a první samostatné interakce.",
+             studium: "E-learning: Základy komunikačních dovedností, Kurz: 5 hvězdičkový servis.", 
+             hasSesit: true },
+        3: { m: 1, title: "Práce s daty", desc: "Základy CRM a klientských karet.", 
+             cekame: "Orientace v systémech a správa dat o klientech.",
+             studium: "Metodika ochrany dat, Práce v CRM systému.", hasSesit: false },
+        4: { m: 1, title: "Základy produktů", desc: "Přehled portfolia pro nováčky.", 
+             cekame: "Znalost základních účtů a karet pro běžné klienty.",
+             studium: "Produktové listy: Účty a vklady.", hasSesit: false },
+        12: { m: 3, title: "Velké vyhodnocení", desc: "Klíčová triáda a posun do finální fáze.", 
+              cekame: "Komplexní prověrka znalostí před manažerem.",
+              studium: "Opakování všech dosavadních modulů.", hasSesit: false, hasTriada: true },
+        // ... další týdny by se doplnily podobně
     };
 
     function initSidebar() {
         const nav = document.getElementById('sidebar-nav');
         let html = '';
-        const mColors = ['var(--m1-color)', 'var(--m2-color)', 'var(--m3-color)', 'var(--m4-color)'];
+        const colors = ['var(--m1-color)', 'var(--m2-color)', 'var(--m3-color)', 'var(--m4-color)'];
         
         for(let m=1; m<=4; m++) {
-            html += `<div class="month-card" style="border-top-color: ${mColors[m-1]}">
-                        <div class="month-title">Měsíc ${m}</div>
-                        <div class="week-list">`;
+            html += `<div class="month-card" style="border-top-color: ${colors[m-1]}">
+                        <div class="month-title">Měsíc ${m}</div>`;
             for(let w=1; w<=16; w++) {
-                if(weeksData[w].m === m) {
+                const wData = weeksData[w] || { m: Math.ceil(w/4), title: `Týden ${w}`, desc: "Pokračující adaptace..." };
+                if(wData.m === m) {
                     html += `<a href="javascript:void(0)" onclick="loadWeek(${w})" id="w-btn-${w}" class="week-item ${w < 2 ? 'completed' : ''}">
                                 <span>Týden ${w}</span>
                                 <div class="status-dot"></div>
                              </a>`;
                 }
             }
-            html += `</div></div>`;
+            html += `</div>`;
         }
         nav.innerHTML = html;
     }
 
     function loadWeek(num) {
-        const week = weeksData[num];
+        const week = weeksData[num] || { m: Math.ceil(num/4), title: `Týden ${num}`, desc: "Pokračování v rozvoji bankovních dovedností.", cekame: "Rozvoj v rámci týmu a stínování.", studium: "Moduly dle aktuálního plánu." };
         const content = document.getElementById('dynamic-content');
         
-        // Update UI
         document.querySelectorAll('.week-item').forEach(el => el.classList.remove('active'));
         document.getElementById(`w-btn-${num}`).classList.add('active');
         
@@ -164,71 +168,66 @@
 
         let triadHtml = week.hasTriada ? `
             <div class="card triad-card">
-                <div class="card-h"><i class="fas fa-calendar-stars"></i> TRIÁDA SESSION - MILNÍK</div>
-                <p>Tento týden tě čeká klíčová schůzka s manažerem a coachem. Zarezervuj si svůj slot v Outlooku.</p>
+                <div class="card-h"><i class="fas fa-calendar-star"></i> TRIÁDA SESSION</div>
+                <p style="font-size: 0.85rem;">Klíčové setkání s manažerem a coachem k vyhodnocení progresu.</p>
             </div>
         ` : '';
 
         let sesitHtml = week.hasSesit ? `
             <div class="card">
-                <div class="card-h"><i class="fas fa-file-signature"></i> Pracovní sešit</div>
-                <p style="font-size:0.85rem">Stáhni si podklady pro tento týden a vypracuj úkoly.</p>
-                <a href="#" class="btn-blue"><i class="fas fa-download"></i> Stáhnout sešit</a>
-                <div class="note-box"><strong>Tip:</strong> Po stažení si sešit ulož na svůj disk v pobočkové složce.</div>
+                <div class="card-h"><i class="fas fa-file-download"></i> Pracovní sešit</div>
+                <p style="font-size:0.8rem">Stáhni si podklady pro tento týden.</p>
+                <a href="#" class="btn-blue">Stáhnout sešit</a>
+                <div class="note-box"><strong>Důležité:</strong> Sešit si ulož na disk v pobočkové složce!</div>
             </div>
         ` : `
             <div class="card">
                 <div class="card-h"><i class="fas fa-info-circle"></i> Pracovní sešit</div>
-                <p style="font-size:0.85rem">Pokračuj v práci na svém sešitu, který jsi si stáhl v 1. nebo 2. týdnu.</p>
-                <p style="font-size:0.8rem; color:#666">Nenacházíš ho? Najdeš ho v <strong>Knihovně dokumentů</strong> níže nebo v historii <strong>Týdne 1</strong>.</p>
+                <p style="font-size:0.8rem; color:#666">Pokračuj v sešitu, který jsi stáhl v týdnu 1 nebo 2. Najdeš ho případně v Knihovně níže.</p>
             </div>
         `;
 
         content.innerHTML = `
-            <div class="card" style="margin-bottom:20px; border-left: 5px solid var(--george-light)">
-                <h2 style="margin:0; color:var(--george-blue)">Týden ${num}: ${week.title}</h2>
-                <p style="color:#666">${week.desc}</p>
+            <div class="card" style="margin-bottom:20px; border-left: 5px solid ${['var(--m1-color)','var(--m2-color)','var(--m3-color)','var(--m4-color)'][week.m-1]}">
+                <h2 style="margin:0; color:var(--george-blue); font-size: 1.1rem;">Týden ${num}: ${week.title}</h2>
+                <p style="color:#666; font-size: 0.85rem;">${week.desc}</p>
             </div>
+            
+            ${triadHtml}
+
             <div class="dashboard-grid">
-                ${triadHtml}
                 <div class="card">
-                    <div class="card-h"><i class="fas fa-bullseye"></i> Co mě čeká</div>
-                    <ul style="font-size:0.85rem; padding-left:20px">
-                        <li>Samostudium metodiky</li>
-                        <li>Stínování u seniorního kolegy</li>
-                        <li>Příprava na certifikační test</li>
-                    </ul>
+                    <div class="card-h"><i class="fas fa-eye"></i> Co mě čeká</div>
+                    <p style="font-size: 0.8rem;">${week.cekame || "Aktivity na pobočce dle zadání."}</p>
                 </div>
                 <div class="card">
                     <div class="card-h"><i class="fas fa-graduation-cap"></i> Samostudium</div>
-                    <div style="font-size:0.85rem">
-                        <p><i class="fas fa-play-circle"></i> Video: George pro profíky</p>
-                        <p><i class="fas fa-file-alt"></i> Metodický list č. ${num+10}</p>
-                    </div>
+                    <p style="font-size: 0.8rem;">${week.studium || "E-learningové moduly."}</p>
                 </div>
                 ${sesitHtml}
                 <div class="card">
-                    <div class="card-h"><i class="fas fa-users-gear"></i> Manažerský panel</div>
+                    <div class="card-h"><i class="fas fa-desktop"></i> Ověřovací webinář</div>
+                    <p style="font-size: 0.8rem;">Ověříme si, jak jsi zvládl samostudium, uděláme metodické ukotvení a zodpovíme tvé dotazy.</p>
+                </div>
+                <div class="card">
+                    <div class="card-h"><i class="fas fa-chalkboard-teacher"></i> Prezenční den</div>
+                    <p style="font-size: 0.8rem;">A teď si to všechno vyzkoušíš a natrénuješ v praxi, aby tě v provozu skoro nic nerozhodilo.</p>
+                </div>
+                <div class="card">
+                    <div class="card-h"><i class="fas fa-check-double"></i> Manažerský panel</div>
                     <div class="thumbs-row">
-                        <div class="thumb-unit" onclick="this.classList.toggle('active')"><i class="fas fa-user-tie"></i><br><small>Manager</small></div>
-                        <div class="thumb-unit" onclick="this.classList.toggle('active')"><i class="fas fa-bullseye"></i><br><small>Coach</small></div>
-                        <div class="thumb-unit" onclick="this.classList.toggle('active')"><i class="fas fa-university"></i><br><small>Bankéř</small></div>
+                        <div class="thumb-unit" onclick="this.classList.toggle('active')"><i class="fas fa-user-tie"></i><br>Manager</div>
+                        <div class="thumb-unit" onclick="this.classList.toggle('active')"><i class="fas fa-bullseye"></i><br>Coach</div>
+                        <div class="thumb-unit" onclick="this.classList.toggle('active')"><i class="fas fa-user"></i><br>Bankéř</div>
                     </div>
                 </div>
             </div>
         `;
     }
 
-    // Footer generator
-    const footer = document.getElementById('footer-contacts');
-    footer.innerHTML = `
-        <div><h4>Lektoři</h4><p>Jan Novák (Úvěry)<br>jana.m (Investice)</p></div>
-        <div><h4>Podpora</h4><p>IT: 800 111 222<br>HR: adaptace@banka.cz</p></div>
-        <div><h4>Užitečné</h4><a href="#">George Design</a><br><a href="#">FAQ</a></div>
-    `;
-
     initSidebar();
     loadWeek(1);
 </script>
+
 </body>
 </html>
