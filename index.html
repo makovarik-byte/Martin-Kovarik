@@ -3,228 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adaptační portál 2.0</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Adaptační portál 2.0 | George Style</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-blue: #003366;
-            --bg-light: #f4f7f9;
-            --white: #ffffff;
+            --george-blue: #00497A;
+            --george-light-blue: #00A1DE;
+            --george-bg: #F2F5F7;
+            --success-green: #28a745;
+            --border-color: #D1D8DD;
+            --text-dark: #333333;
             --radius: 8px;
-            --m1: #f1c40f; --m2: #e67e22; --m3: #2ecc71; --m4: #3498db;
         }
 
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg-light); margin: 0; color: #334155; }
-        header { background: var(--white); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
-        .logo { font-weight: 800; color: var(--primary-blue); border-left: 4px solid var(--primary-blue); padding-left: 10px; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--george-bg); color: var(--text-dark); margin: 0; }
         
-        .hero { background: linear-gradient(135deg, var(--primary-blue) 0%, #0055a4 100%); color: white; padding: 2rem 5%; }
-        .container { max-width: 1200px; margin: 2rem auto; padding: 0 20px; display: grid; grid-template-columns: 350px 1fr; gap: 2rem; }
-
-        /* Sidebar - Roadmap */
-        .roadmap-sidebar { height: fit-content; }
-        .month-box { margin-bottom: 1rem; border-radius: var(--radius); overflow: hidden; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .month-header { padding: 12px 15px; cursor: pointer; display: flex; justify-content: space-between; color: white; font-weight: 700; font-size: 0.9rem; }
-        .week-list { padding: 10px; display: none; }
-        .week-list.active { display: block; }
-        .week-btn { width: 100%; text-align: left; padding: 10px; margin-bottom: 5px; border: 1px solid #edf2f7; border-radius: 6px; background: white; cursor: pointer; transition: 0.2s; font-size: 0.85rem; }
-        .week-btn:hover { border-color: var(--primary-blue); background: #f8fafc; }
-        .week-btn.selected { border-left: 4px solid var(--primary-blue); background: #f1f5f9; font-weight: 600; }
-
-        /* Detail Týdne */
-        .detail-panel { background: white; padding: 2rem; border-radius: var(--radius); box-shadow: 0 4px 6px rgba(0,0,0,0.05); min-height: 600px; }
-        .week-title-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; color: white; font-size: 0.8rem; margin-bottom: 10px; font-weight: 600; }
-        
-        .day-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; margin-top: 2rem; }
-        .day-card { border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px; background: #fafafa; }
-        .day-card h5 { margin: 0 0 10px 0; color: var(--primary-blue); border-bottom: 2px solid #eee; padding-bottom: 5px; font-size: 0.8rem; text-transform: uppercase; }
-        .task { font-size: 0.8rem; margin-bottom: 8px; display: flex; gap: 8px; align-items: flex-start; }
-        .task i { color: #94a3b8; margin-top: 3px; font-size: 0.7rem; }
-
-        /* Thumbs */
-        .gatekeeper { margin-top: 3rem; padding: 1.5rem; background: #f1f5f9; border-radius: var(--radius); display: flex; justify-content: space-around; align-items: center; border: 2px dashed #cbd5e1; }
-        .thumb-box { text-align: center; }
-        .thumb-icon { font-size: 1.5rem; color: #cbd5e1; cursor: pointer; transition: 0.3s; }
-        .thumb-icon.active { color: var(--m3); transform: scale(1.2); }
-
-        @media (max-width: 900px) {
-            .container { grid-template-columns: 1fr; }
-            .day-grid { grid-template-columns: 1fr; }
+        /* George Header */
+        header { 
+            background: white; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; 
+            border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 1000;
         }
+        .header-left { display: flex; align-items: center; gap: 20px; font-weight: 600; color: var(--george-blue); }
+        .progress-container { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: #666; }
+        .circular-progress { 
+            width: 36px; height: 36px; border-radius: 50%; 
+            background: conic-gradient(var(--george-blue) 18%, #eee 0); 
+            display: flex; align-items: center; justify-content: center; position: relative;
+        }
+        .circular-progress::before { content: "18%"; position: absolute; background: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: bold; }
+
+        .container { max-width: 1400px; margin: 25px auto; padding: 0 20px; display: grid; grid-template-columns: 280px 1fr; gap: 25px; }
+
+        /* Sidebar Navigation */
+        .sidebar { background: white; border-radius: var(--radius); border: 1px solid var(--border-color); padding: 15px; height: fit-content; }
+        .month-group { margin-bottom: 15px; }
+        .month-label { font-size: 0.75rem; font-weight: 700; color: #888; text-transform: uppercase; margin-bottom: 8px; padding-left: 10px; }
+        .week-link { 
+            display: block; padding: 10px 12px; text-decoration: none; color: var(--text-dark); 
+            font-size: 0.9rem; border-radius: 6px; margin-bottom: 2px; transition: 0.2s;
+        }
+        .week-link:hover { background: #E6F3F9; color: var(--george-blue); }
+        .week-link.active { background: var(--george-blue); color: white; }
+        .week-link.completed::after { content: " \f058"; font-family: "Font Awesome 6 Free"; font-weight: 900; float: right; color: var(--success-green); }
+
+        /* Main Dashboard Area */
+        .main-content { display: flex; flex-direction: column; gap: 20px; }
+        
+        .week-header-card { 
+            background: white; padding: 15px 25px; border-radius: var(--radius); border-left: 4px solid var(--george-blue);
+            display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        /* The Grid from Image */
+        .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .card { background: white; border-radius: var(--radius); border: 1px solid var(--border-color); padding: 20px; position: relative; }
+        .card-title { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--george-blue); margin-bottom: 15px; font-size: 0.95rem; }
+        .card-title i { font-size: 1.1rem; color: var(--george-light-blue); }
+
+        /* Specific Card Styles */
+        .btn-download { 
+            background: var(--george-blue); color: white; width: 100%; padding: 12px; border: none; 
+            border-radius: 6px; cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 10px;
+        }
+        .info-row { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: #555; margin-bottom: 8px; }
+        .follow-up-section h6 { margin: 15px 0 5px 0; font-size: 0.75rem; color: #888; text-transform: uppercase; }
+        .follow-up-list { list-style: none; padding: 0; font-size: 0.85rem; }
+        .follow-up-list li::before { content: "• "; color: var(--george-light-blue); font-weight: bold; }
+
+        /* Thumb Panel */
+        .manager-panel { display: flex; gap: 15px; margin-top: 10px; }
+        .thumb-card { 
+            flex: 1; border: 1px solid var(--border-color); border-radius: 10px; padding: 15px; text-align: center; 
+            background: #F8FAFB; cursor: pointer; transition: 0.3s;
+        }
+        .thumb-card.voted { background: #EFFFF4; border-color: var(--success-green); }
+        .thumb-card i { font-size: 1.5rem; margin-bottom: 5px; display: block; }
+        .thumb-card.up { color: var(--success-green); }
+        .thumb-card.down { color: #888; }
+        
+        /* Secondary Sections */
+        .sub-section { background: white; border-radius: var(--radius); padding: 25px; border: 1px solid var(--border-color); }
+        .doc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-top: 15px; }
+        .doc-item { text-align: center; padding: 15px; border: 1px solid #eee; border-radius: 8px; transition: 0.2s; cursor: pointer; }
+        .doc-item:hover { border-color: var(--george-light-blue); background: #f9f9f9; }
+        .doc-item i { font-size: 2rem; color: #E74C3C; margin-bottom: 8px; }
+
+        footer { background: white; border-top: 1px solid var(--border-color); padding: 40px 5%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 50px; }
+        .footer-col h4 { color: var(--george-blue); margin-bottom: 15px; }
+        .footer-col p, .footer-col a { font-size: 0.85rem; color: #666; text-decoration: none; margin-bottom: 8px; display: block; }
+
+        @media (max-width: 1000px) { .container { grid-template-columns: 1fr; } .dashboard-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">ADAPTAČNÍ PORTÁL 2.0</div>
-    <div style="font-size: 0.85rem;"><strong>Bankéř:</strong> Jan Novák <span style="margin-left:15px; color:#64748b">Fáze: ČBA Úvěry</span></div>
+    <div class="header-left">
+        <span>Adaptační Banka</span>
+        <span style="color: #ddd;">|</span>
+        <span>Adaptační portál 2.0</span>
+    </div>
+    <div class="progress-container">
+        <span>Můj progres</span>
+        <div class="circular-progress"></div>
+    </div>
 </header>
 
-<section class="hero">
-    <h1>Tvůj digitální průvodce</h1>
-    <p>Klikni na týden vlevo pro zobrazení detailního plánu.</p>
-</section>
-
 <div class="container">
-    <aside class="roadmap-sidebar">
-        <div class="month-box">
-            <div class="month-header" style="background: var(--m1);" onclick="toggleMonth('w1-4')">
-                <span>1. MĚSÍC: ČBA ÚVĚRY</span> <i class="fas fa-chevron-down"></i>
-            </div>
-            <div id="w1-4" class="week-list active">
-                <button class="week-btn selected" onclick="loadWeek(1, this)">Týden 1: Vítejte v týmu</button>
-                <button class="week-btn" onclick="loadWeek(2, this)">Týden 2: Komunikace a servis</button>
-                <button class="week-btn" onclick="loadWeek(3, this)">Týden 3: Telefonování</button>
-                <button class="week-btn" onclick="loadWeek(4, this)">Týden 4: Poradenství START</button>
-            </div>
+    <aside class="sidebar">
+        <div class="month-group">
+            <div class="month-label">Měsíc 1</div>
+            <a href="#" class="week-link active">Týden 1 <span style="font-size: 0.7rem; color: var(--success-green); background: #EFFFF4; padding: 2px 6px; border-radius: 4px; float: right;">Hotovo</span></a>
+            <a href="#" class="week-link">Týden 2</a>
+            <a href="#" class="week-link">Týden 3</a>
+            <a href="#" class="week-link">Týden 4</a>
         </div>
-
-        <div class="month-box">
-            <div class="month-header" style="background: var(--m2);" onclick="toggleMonth('w5-8')">
-                <span>2. MĚSÍC: ČBA POJIŠTĚNÍ</span> <i class="fas fa-chevron-down"></i>
-            </div>
-            <div id="w5-8" class="week-list">
-                <button class="week-btn" onclick="loadWeek(5, this)">Týden 5: Úvod do úvěrů</button>
-                <button class="week-btn" onclick="loadWeek(6, this)">Týden 6: Index Úvěry 1</button>
-                <button class="week-btn" onclick="loadWeek(7, this)">Týden 7: Bydlení</button>
-                <button class="week-btn" onclick="loadWeek(8, this)">Týden 8: Pojištění život</button>
-            </div>
+        <div class="month-group">
+            <div class="month-label">Měsíc 2</div>
+            <a href="#" class="week-link">Týden 5</a>
+            <a href="#" class="week-link">Týden 6</a>
+            <a href="#" class="week-link">Týden 7</a>
+            <a href="#" class="week-link">Týden 8</a>
         </div>
-
-        <div class="month-box">
-            <div class="month-header" style="background: var(--m3);" onclick="toggleMonth('w9-12')">
-                <span>3. MĚSÍC: ČBA INVESTICE</span> <i class="fas fa-chevron-down"></i>
-            </div>
-            <div id="w9-12" class="week-list">
-                <button class="week-btn" onclick="loadWeek(9, this)">Týden 9: Úvod pojištění</button>
-                <button class="week-btn" onclick="loadWeek(10, this)">Týden 10: Neživotní poj.</button>
-                <button class="week-btn" onclick="loadWeek(11, this)">Týden 11: Budoucnost</button>
-                <button class="week-btn" onclick="loadWeek(12, this)">Týden 12: Komplet</button>
-            </div>
+        <div class="month-group">
+            <div class="month-label">Měsíc 3</div>
+            <a href="#" class="week-link">Týden 9</a>
+            <a href="#" class="week-link">Týden 10</a>
+            <a href="#" class="week-link">Týden 11</a>
+            <a href="#" class="week-link">Týden 12</a>
         </div>
-
-        <div class="month-box">
-            <div class="month-header" style="background: var(--m4);" onclick="toggleMonth('w13-16')">
-                <span>4. MĚSÍC: ZKOUŠKY</span> <i class="fas fa-chevron-down"></i>
-            </div>
-            <div id="w13-16" class="week-list">
-                <button class="week-btn" onclick="loadWeek(13, this)">Týden 13: Triáda 2</button>
-                <button class="week-btn" onclick="loadWeek(14, this)">Týden 14: Zkouška FB 1.0</button>
-                <button class="week-btn" onclick="loadWeek(15, this)">Týden 15: Otevřená hodinka</button>
-                <button class="week-btn" onclick="loadWeek(16, this)">Týden 16: Start Q2 - Plán 30%</button>
-            </div>
+        <div class="month-group">
+            <div class="month-label">Měsíc 4</div>
+            <a href="#" class="week-link">Týden 13</a>
+            <a href="#" class="week-link">Týden 14</a>
+            <a href="#" class="week-link">Týden 15</a>
+            <a href="#" class="week-link">Týden 16</a>
         </div>
     </aside>
 
-    <main class="detail-panel" id="detail-panel">
-        <div id="week-header-content">
-            <span class="week-title-badge" style="background: var(--m1);">Aktuální týden</span>
-            <h2 id="main-title">Týden 1: Vítejte v týmu</h2>
-            <p id="main-desc">Zaměření: Orientace na pobočce, první kroky v systémech.</p>
+    <main class="main-content">
+        <div class="week-header-card">
+            <h2 style="margin:0; font-size: 1.2rem; color: var(--george-blue);"><i class="fas fa-check-circle" style="color: var(--success-green);"></i> Týden 1: Základy a orientace</h2>
+            <i class="fas fa-chevron-up" style="color: #ccc;"></i>
         </div>
 
-        <div class="day-grid" id="day-grid">
+        <div class="dashboard-grid">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-bullseye"></i> Co mě čeká</div>
+                <p style="font-size: 0.85rem; color: #555;">Tento týden se zaměříš na základy komunikace s klientem, poznáš produktové portfolio a absolvuješ první stínování na pobočce.</p>
             </div>
 
-        <div class="gatekeeper">
-            <div style="font-weight: 700; color: var(--primary-blue);">POTVRZENÍ TÝDNE:</div>
-            <div class="thumb-box"><i class="fas fa-thumbs-up thumb-icon" onclick="toggleThumb(this)"></i><br><small>Bankéř</small></div>
-            <div class="thumb-box"><i class="fas fa-thumbs-up thumb-icon" onclick="toggleThumb(this)"></i><br><small>Coach</small></div>
-            <div class="thumb-box"><i class="fas fa-thumbs-up thumb-icon" onclick="toggleThumb(this)"></i><br><small>Manažer</small></div>
+            <div class="card">
+                <div class="card-title"><i class="fas fa-book-open"></i> Samostudium</div>
+                <div class="info-row"><i class="fas fa-video"></i> Video: Komunikační standardy</div>
+                <div class="info-row"><i class="fas fa-laptop"></i> E-learning: Úvod do bankovnictví</div>
+                <div class="info-row"><i class="fas fa-file-alt"></i> Článek: Produktový katalog</div>
+            </div>
+
+            <div class="card">
+                <div class="card-title"><i class="fas fa-edit"></i> Pracovní sešit</div>
+                <p style="font-size: 0.85rem; color: #555; margin-bottom: 15px;">Stáhni si sešit pro tento týden a vyplň zadané úkoly.</p>
+                <button class="btn-download"><i class="fas fa-file-download"></i> Stáhnout sešit (PDF)</button>
+            </div>
+
+            <div class="card">
+                <div class="card-title"><i class="fas fa-map-marker-alt"></i> Prezenční den</div>
+                <div class="info-row"><strong>Kurz:</strong> Základy poradenství</div>
+                <div class="info-row"><strong>Místo:</strong> Školící centrum Praha</div>
+                <div class="info-row"><strong>Čas:</strong> 9:00 – 16:00</div>
+            </div>
+
+            <div class="card">
+                <div class="card-title"><i class="fas fa-history"></i> Follow-up aktivity</div>
+                <div class="follow-up-section">
+                    <h6>Co se nováček naučil</h6>
+                    <ul class="follow-up-list">
+                        <li>Základní produktové portfolio</li>
+                        <li>Etický kodex banky</li>
+                    </ul>
+                    <h6>Na co se zaměřit v praxi</h6>
+                    <ul class="follow-up-list">
+                        <li>Aktivní naslouchání klientovi</li>
+                        <li>Nabídka vhodného produktu</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title"><i class="fas fa-user-check"></i> Manažerský panel – 3 Palce</div>
+                <p style="font-size: 0.75rem; color: #888; margin-bottom: 15px;">Všechny tři palce musí být zelené pro uzavření týdne.</p>
+                <div class="manager-panel">
+                    <div class="thumb-card" onclick="this.classList.toggle('voted')">
+                        <i class="fas fa-user-tie"></i>
+                        <i class="fas fa-thumbs-down down"></i>
+                        <span style="font-size: 0.7rem;">Manager</span>
+                    </div>
+                    <div class="thumb-card voted">
+                        <i class="fas fa-bullseye" style="color: #e74c3c;"></i>
+                        <i class="fas fa-thumbs-up up" style="color: var(--success-green);"></i>
+                        <span style="font-size: 0.7rem;">Coach</span>
+                    </div>
+                    <div class="thumb-card" onclick="this.classList.toggle('voted')">
+                        <i class="fas fa-university"></i>
+                        <i class="fas fa-thumbs-down down"></i>
+                        <span style="font-size: 0.7rem;">Bankéř</span>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 15px; font-size: 0.8rem; color: #888; background: #eee; padding: 5px; border-radius: 4px;">
+                    ⌛ Čeká se na schválení...
+                </div>
+            </div>
+        </div>
+
+        <div class="sub-section">
+            <h3 style="color: var(--george-blue); margin-top: 0;"><i class="fas fa-calendar-check"></i> Triad Session - LOOP</h3>
+            <p style="font-size: 0.85rem; color: #666;">Zarezervuj si termín pro společnou schůzku s manažerem a coachem.</p>
+            <div style="display: flex; gap: 20px; margin-top: 15px;">
+                <div style="flex: 1; padding: 15px; border: 1px solid var(--george-light-blue); border-radius: 8px; text-align: center;">
+                    <strong>Triáda 1</strong><br><small>Týden 2 - 4</small><br>
+                    <button style="margin-top:10px; padding: 5px 15px; border-radius: 4px; border: 1px solid var(--george-blue); background: none; color: var(--george-blue); cursor: pointer;">Rezervovat</button>
+                </div>
+                <div style="flex: 1; padding: 15px; border: 1px solid #ddd; border-radius: 8px; text-align: center; color: #ccc;">
+                    <strong>Triáda 2</strong><br><small>Týden 12 - 14</small><br>
+                    <small>Zatím nedostupné</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="sub-section">
+            <h3 style="color: var(--george-blue); margin-top: 0;"><i class="fas fa-folder-open"></i> Knihovna dokumentů (Metodiky)</h3>
+            <div class="doc-grid">
+                <div class="doc-item"><i class="fas fa-file-pdf"></i><br><small>Metodika Úvěry</small></div>
+                <div class="doc-item"><i class="fas fa-file-pdf"></i><br><small>Pojištění - Manuál</small></div>
+                <div class="doc-item"><i class="fas fa-file-word"></i><br><small>Index Digigram</small></div>
+                <div class="doc-item"><i class="fas fa-file-excel"></i><br><small>Reporting Q1</small></div>
+            </div>
         </div>
     </main>
 </div>
 
+<footer>
+    <div class="footer-col">
+        <h4>Kontakty na lektory</h4>
+        <p>Petr Rychlý - Senior Lektor<br>petr.rychly@banka.cz</p>
+        <p>Jana Moudrá - Business Coach<br>jana.moudra@banka.cz</p>
+    </div>
+    <div class="footer-col">
+        <h4>Technická podpora</h4>
+        <p>IT Helpdesk: <strong>+420 222 333 444</strong></p>
+        <p>E-mail: support.portal@banka.cz</p>
+        <a href="#">Otevřít ticket v Jira</a>
+    </div>
+    <div class="footer-col">
+        <h4>Odkazy a FAQ</h4>
+        <a href="#">Často kladené dotazy</a>
+        <a href="#">Intranet - HR Sekce</a>
+        <a href="#">George Design System</a>
+    </div>
+</footer>
+
 <script>
-    const data = {
-        1: { title: "Vítejte v týmu", desc: "Zahájení adaptace a první kroky v týmu.", days: [
-            ["Příprava modulů", "Index Digigram 1"], ["Stínování", "Triáda 1"], ["Prezenční den", "Vítejte v ČS"], ["Follow up aktivity", "Stínování"], ["ČBA certifikace", "Uzavření týdne"]
-        ], color: "var(--m1)" },
-        2: { title: "Komunikace a servis", desc: "Zaměření na klientský servis a Index Poradenství 1.", days: [
-            ["Index Poradenství 1", "Příprava"], ["Tvorba sešitu"], ["Ověřovací webinář"], ["Fyzický den", "Příchozí klient"], ["Follow up", "Pobočka"]
-        ], color: "var(--m1)" },
-        3: { title: "Telefonování", desc: "Aktivní oslovování klientů a metodika volání.", days: [
-            ["Index Telefonování"], ["Tvorba sešitu"], ["Ověřovací webinář"], ["Fyzický den", "Telefonování"], ["Follow up", "Pobočka"]
-        ], color: "var(--m1)" },
-        4: { title: "Poradenství START", desc: "První komplexní schůzky a rozpočet.", days: [
-            ["Index Rozpočet", "Rezerva"], ["Tvorba sešitu"], ["Ověřovací webinář"], ["Fyzický den", "START"], ["Follow up", "Pobočka"]
-        ], color: "var(--m1)" },
-        5: { title: "Úvod do úvěrů", desc: "Start druhé fáze: ČBA Úvěry.", days: [
-            ["Příprava modulů"], ["Stínování"], ["Webinář Úvěry"], ["Fyzický den Úvěry"], ["Test znalostí"]
-        ], color: "var(--m2)" },
-        6: { title: "Index Úvěry 1", desc: "Detailní metodika úvěrových produktů.", days: [
-            ["Index Úvěry 1"], ["Tvorba sešitu"], ["Webinář"], ["Fyzický den Úvěry"], ["Pobočka"]
-        ], color: "var(--m2)" },
-        7: { title: "Bydlení", desc: "Hypotéky a financování potřeb klienta.", days: [
-            ["Index Bydlení"], ["Tvorba sešitu"], ["Webinář"], ["Fyzický den Bydlení"], ["Pobočka"]
-        ], color: "var(--m2)" },
-        8: { title: "Pojištění život", desc: "Zajištění rizik a životní pojištění.", days: [
-            ["Index Pojištění 1"], ["Tvorba sešitu"], ["Webinář"], ["Fyzický den Život"], ["Pobočka"]
-        ], color: "var(--m2)" },
-        9: { title: "Úvod pojištění", desc: "Třetí fáze: ČBA Pojištění.", days: [
-            ["Moduly Pojištění"], ["Stínování"], ["Webinář"], ["Fyzický den"], ["Pobočka"]
-        ], color: "var(--m3)" },
-        10: { title: "Neživotní poj.", desc: "Auta, majetek a odpovědnost.", days: [
-            ["Index Neživot"], ["Tvorba sešitu"], ["Webinář"], ["Fyzický den Neživot"], ["Pobočka"]
-        ], color: "var(--m3)" },
-        11: { title: "Budoucnost", desc: "Investice a penzijní produkty.", days: [
-            ["Index Budoucnost"], ["Tvorba sešitu"], ["Webinář"], ["Fyzický den Budoucnost"], ["Pobočka"]
-        ], color: "var(--m3)" },
-        12: { title: "Komplet", desc: "Komplexní poradenství napříč produkty.", days: [
-            ["Příprava Komplet"], ["Tvorba sešitu"], ["Webinář"], ["Fyzický den Komplet"], ["Pobočka"]
-        ], color: "var(--m3)" },
-        13: { title: "Triáda 2", desc: "Zpětná vazba před finální zkouškou.", days: [
-            ["Příprava Triáda"], ["Triáda 2"], ["Konzultace"], ["Příprava na zkoušku"], ["Pobočka"]
-        ], color: "var(--m4)" },
-        14: { title: "Zkouška FB 1.0", desc: "Certifikace Future Banker 1.0.", days: [
-            ["Opakování"], ["Zkouška FB 1.0"], ["Vyhodnocení"], ["Pobočka"], ["Pobočka"]
-        ], color: "var(--m4)" },
-        15: { title: "Otevřená hodinka", desc: "Konzultace s Business Coachem.", days: [
-            ["Indexy"], ["Otevřená hodinka"], ["Sdílecí webinář"], ["Pobočka"], ["Pobočka"]
-        ], color: "var(--m4)" },
-        16: { title: "Start Q2", desc: "Plné zapojení do obchodního plánu.", days: [
-            ["Plánování Q2"], ["Pobočka"], ["Pobočka"], ["Pobočka"], ["Start - plán 30%"]
-        ], color: "var(--m4)" }
-    };
-
-    function loadWeek(num, btn) {
-        const week = data[num];
-        document.getElementById('main-title').innerText = `Týden ${num}: ${week.title}`;
-        document.getElementById('main-desc').innerText = `Zaměření: ${week.desc}`;
-        
-        const badge = document.querySelector('.week-title-badge');
-        badge.style.background = week.color;
-        badge.innerText = num <= 4 ? "1. Měsíc" : num <= 8 ? "2. Měsíc" : num <= 12 ? "3. Měsíc" : "4. Měsíc";
-
-        const grid = document.getElementById('day-grid');
-        grid.innerHTML = '';
-        const daysLabel = ["Pondělí", "Úterý", "Středa", "Čtvrtek", "Pátek"];
-        
-        week.days.forEach((tasks, i) => {
-            let html = `<div class="day-card"><h5>${daysLabel[i]}</h5>`;
-            tasks.forEach(t => {
-                html += `<div class="task"><i class="fas fa-check-circle"></i> ${t}</div>`;
-            });
-            html += `</div>`;
-            grid.innerHTML += html;
+    // Jednoduchá interaktivita pro palce
+    const thumbCards = document.querySelectorAll('.thumb-card');
+    thumbCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const icon = card.querySelector('.fa-thumbs-up, .fa-thumbs-down');
+            if (card.classList.contains('voted')) {
+                icon.className = 'fas fa-thumbs-up up';
+            } else {
+                icon.className = 'fas fa-thumbs-down down';
+            }
         });
-
-        document.querySelectorAll('.week-btn').forEach(b => b.classList.remove('selected'));
-        btn.classList.add('selected');
-    }
-
-    function toggleMonth(id) {
-        const el = document.getElementById(id);
-        el.classList.toggle('active');
-    }
-
-    function toggleThumb(el) {
-        el.classList.toggle('active');
-    }
-
-    // Default load
-    loadWeek(1, document.querySelector('.week-btn'));
+    });
 </script>
 
 </body>
