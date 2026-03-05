@@ -8,113 +8,119 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --george-blue: #00497A;
-            --george-light: #00A1DE;
-            --m1-color: #f1c40f; --m2-color: #e67e22; --m3-color: #2ecc71; --m4-color: #3498db;
-            --bg: #F2F5F7; --white: #ffffff; --radius: 12px;
+            /* Oficiální barvy ze vzorníku */
+            --sporka-blue: #2870ED;
+            --sporka-teal: #02A3A4;
+            --sporka-forest: #028661;
+            --sporka-apple: #0CB43F;
+            --sporka-orange: #FF6130;
+            --sporka-pink: #EB4C79;
+            --sporka-aubergine: #721C7A;
+            --sporka-stone: #245375;
+            
+            --bg: #F2F5F7;
+            --white: #ffffff;
+            --radius: 12px;
             --shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 
         body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: #333; margin: 0; scroll-behavior: smooth; }
         
-        /* Personalizovaný Header */
+        /* Osobní Header */
         header { 
             background: var(--white); padding: 12px 5%; display: flex; justify-content: space-between; 
             align-items: center; border-bottom: 1px solid #D1D8DD; position: sticky; top: 0; z-index: 1000;
         }
         .user-welcome { display: flex; align-items: center; gap: 15px; }
-        .user-avatar { width: 45px; height: 45px; background: var(--george-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .user-avatar { width: 45px; height: 45px; background: var(--sporka-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem; }
         
-        .progress-wrapper { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; }
-        .bar-bg { width: 200px; height: 10px; background: #eee; border-radius: 5px; overflow: hidden; }
-        .bar-fill { height: 100%; background: var(--george-light); transition: 1s ease-in-out; width: 0%; }
+        .progress-container { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; }
+        .bar-bg { width: 220px; height: 10px; background: #eee; border-radius: 5px; overflow: hidden; }
+        .bar-fill { height: 100%; background: var(--sporka-blue); transition: 1s ease-in-out; width: 0%; }
 
-        .container { max-width: 1400px; margin: 25px auto; padding: 0 20px; display: grid; grid-template-columns: 280px 1fr; gap: 30px; }
+        .container { max-width: 1400px; margin: 25px auto; padding: 0 20px; display: grid; grid-template-columns: 300px 1fr; gap: 30px; }
 
-        /* Sidebar Navigation */
+        /* Sidebar s fázemi */
         .sidebar { display: flex; flex-direction: column; gap: 15px; }
         .month-card { background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border-top: 5px solid #ccc; }
-        .month-title { padding: 12px 15px; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; color: #666; background: #fafafa; border-bottom: 1px solid #eee; }
-        .week-item { 
-            display: flex; align-items: center; justify-content: space-between; padding: 12px 15px; 
-            text-decoration: none; color: #444; font-size: 0.9rem; border-bottom: 1px solid #f8f8f8; transition: 0.2s;
-        }
-        .week-item:hover { background: #f0f7ff; color: var(--george-blue); }
-        .week-item.active { background: var(--george-blue); color: white; font-weight: 600; }
-        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #ddd; }
-        .week-item.active .status-dot { background: white; box-shadow: 0 0 5px white; }
+        .week-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 15px; text-decoration: none; color: #444; font-size: 0.9rem; border-bottom: 1px solid #f8f8f8; transition: 0.2s; }
+        .week-item:hover { background: #f0f7ff; }
+        .week-item.active { background: var(--sporka-stone); color: white; font-weight: 600; }
 
-        /* Main Dashboard Grid */
-        .dashboard-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-        .card { background: var(--white); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); border: 1px solid rgba(0,0,0,0.02); }
-        .card-h { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-weight: 700; color: var(--george-blue); font-size: 1rem; }
-        .card-h i { color: var(--george-light); width: 24px; text-align: center; }
+        /* Hlavní plocha */
+        .card { background: var(--white); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); margin-bottom: 20px; }
+        .card-h { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; font-weight: 700; color: var(--sporka-stone); border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; }
+        
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
 
         /* Manažerský Sčot */
-        .scot-box { background: #f0f9ff; border-radius: 10px; padding: 15px; margin-top: 15px; border-left: 4px solid var(--george-light); }
-        .scot-title { font-size: 0.8rem; font-weight: 800; color: var(--george-blue); text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
-        .scot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .scot-list { font-size: 0.8rem; line-height: 1.4; padding-left: 18px; margin: 0; }
+        .scot-area { background: #f0f9ff; border-radius: 10px; padding: 20px; border-left: 5px solid var(--sporka-teal); margin-top: 10px; }
+        .scot-list { font-size: 0.85rem; line-height: 1.6; padding-left: 20px; }
 
-        /* Příští týden Preview */
-        .next-week-card { grid-column: span 2; background: #fff; border: 2px dashed #cbd5e1; border-radius: var(--radius); padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
-        .next-label { font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; }
+        /* Organizační boxy */
+        .info-box { background: #f8fafc; padding: 12px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 0.85rem; margin: 10px 0; }
+        .info-line { display: flex; align-items: center; gap: 10px; margin: 4px 0; }
 
-        /* Org Info */
-        .org-box { background: #f8fafc; padding: 10px; border-radius: 8px; font-size: 0.8rem; margin: 10px 0; border: 1px solid #e2e8f0; }
-        .org-line { margin: 3px 0; color: #475569; }
+        /* Interaktivní palce */
+        .thumbs-row { display: flex; gap: 10px; margin-top: 15px; }
+        .thumb { flex: 1; padding: 15px; border-radius: 8px; border: 2px solid #eee; text-align: center; cursor: pointer; transition: 0.3s; filter: grayscale(1); }
+        .thumb.active { border-color: var(--sporka-apple); background: #f0fff4; filter: grayscale(0); transform: scale(1.05); }
+        .thumb i { font-size: 1.5rem; margin-bottom: 5px; }
 
-        /* Buttons & Thumbs */
-        .btn-blue { background: var(--george-blue); color: white; padding: 10px; border-radius: 8px; border: none; cursor: pointer; font-weight: 600; width: 100%; display: block; text-align: center; text-decoration: none; font-size: 0.85rem; margin-top: 8px; transition: 0.3s; }
-        .btn-blue:hover { background: var(--george-light); transform: translateY(-1px); }
-        .btn-teams { background: #464EB8; }
+        /* Badge fází */
+        .faze-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 800; color: white; text-transform: uppercase; margin-bottom: 10px; }
 
-        .thumbs-row { display: flex; gap: 10px; margin-top: 10px; }
-        .thumb-unit { flex: 1; padding: 12px; border-radius: 8px; background: #f8fafc; border: 1px solid #e2e8f0; text-align: center; cursor: pointer; font-size: 0.75rem; transition: 0.3s; }
-        .thumb-unit.active { background: #ecfdf5; border-color: #10b981; color: #059669; transform: scale(1.02); }
-        
-        /* Badges */
-        .badge-list { display: flex; gap: 8px; margin-top: 4px; }
-        .badge-item { width: 22px; height: 22px; border-radius: 50%; background: #eee; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; color: #999; }
-        .badge-item.active { background: #f1c40f; color: white; }
-
-        .triad-banner { grid-column: span 2; background: linear-gradient(90deg, #00497A 0%, #00A1DE 100%); color: white; padding: 15px 20px; border-radius: var(--radius); margin-bottom: 10px; display: flex; align-items: center; gap: 15px; }
+        .btn-teams { background: #464EB8; color: white; padding: 10px; border-radius: 8px; text-decoration: none; display: block; text-align: center; font-weight: 600; margin-top: 10px; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
 <header>
     <div class="user-welcome">
-        <div class="user-avatar" id="avatar-initial">M</div>
+        <div class="user-avatar">M</div>
         <div>
-            <div style="font-weight: 800; color: var(--george-blue); font-size: 1.1rem;">Vítej, <span id="user-name">Martine</span>! 👋</div>
-            <div id="status-text" style="font-size: 0.75rem; color: #64748b;">Právě jsi v 1. týdnu (Fáze: Adaptace)</div>
-            <div class="badge-list">
-                <div class="badge-item active" title="Nováček"><i class="fas fa-seedling"></i></div>
-                <div class="badge-item" title="První měsíc"><i class="fas fa-medal"></i></div>
-                <div class="badge-item" title="Certifikovaný bankéř"><i class="fas fa-trophy"></i></div>
-            </div>
+            <div style="font-weight: 800; color: var(--sporka-stone); font-size: 1.1rem;">Vítej zpět, Martine! 👋</div>
+            <div id="dynamic-status" style="font-size: 0.75rem; color: #64748b;">Dnes je tvůj 12. den adaptace ve fázi ČBA Úvěry.</div>
         </div>
     </div>
-    <div class="progress-wrapper">
-        <span style="font-size: 0.7rem; font-weight: 800; color: var(--george-blue); letter-spacing: 0.5px;">CELKOVÝ POKROK</span>
+    <div class="progress-container">
+        <span style="font-size: 0.7rem; font-weight: 800; color: var(--sporka-stone);">CELKOVÝ POKROK (4 MĚSÍCE)</span>
         <div class="bar-bg"><div id="main-progress" class="bar-fill"></div></div>
-        <span id="progress-percent" style="font-size: 0.75rem; font-weight: 800; color: var(--george-light);">0%</span>
+        <span id="percent-text" style="font-size: 0.75rem; font-weight: 800; color: var(--sporka-blue);">0%</span>
     </div>
 </header>
 
 <div class="container">
     <aside class="sidebar" id="sidebar-nav"></aside>
 
-    <main class="main-stage">
-        <div id="dynamic-content"></div>
+    <main>
+        <div id="week-content"></div>
         
-        <div id="manager-scot-area"></div>
+        <div class="card" id="manager-panel">
+            <div class="card-h"><i class="fas fa-tasks"></i> Manažerský panel a potvrzení týdne</div>
+            <div class="grid-2">
+                <div class="scot-area">
+                    <div style="font-weight: 800; font-size: 0.8rem; margin-bottom: 10px; color: var(--sporka-stone);">CO MÁ BANKÉŘ UMĚT (SČOT)</div>
+                    <ul class="scot-list" id="scot-learn"></ul>
+                </div>
+                <div class="scot-area" style="border-left-color: var(--sporka-orange); background: #fffcf0;">
+                    <div style="font-weight: 800; font-size: 0.8rem; margin-bottom: 10px; color: var(--sporka-stone);">NA CO SE ZAMĚŘIT V PRAXI</div>
+                    <ul class="scot-list" id="scot-practice"></ul>
+                </div>
+            </div>
+            <div class="thumbs-row">
+                <div class="thumb" onclick="this.classList.toggle('active')"><i class="fas fa-user-tie"></i><br><small>Manažer</small></div>
+                <div class="thumb" onclick="this.classList.toggle('active')"><i class="fas fa-graduation-cap"></i><br><small>Coach</small></div>
+                <div class="thumb" onclick="this.classList.toggle('active')"><i class="fas fa-user"></i><br><small>Bankéř</small></div>
+            </div>
+        </div>
 
-        <div id="next-week-preview-area"></div>
-
-        <div class="card" style="margin-top: 30px; background: #f1f5f9; border: none; text-align: center; padding: 15px;">
-            <p style="font-size: 0.8rem; color: #64748b; margin: 0;">Nenacházíš svůj pracovní sešit? Stáhni si ho v <a href="#" style="color: var(--george-light); font-weight: 700;">Knihovně dokumentů</a> nebo v detailu 1. týdne.</p>
+        <div class="card" style="border: 2px dashed #cbd5e1; background: none; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <span style="font-size: 0.7rem; font-weight: 800; color: #64748b;">VÝHLED NA PŘÍŠTÍ TÝDEN</span>
+                <div style="font-weight: 700; color: var(--sporka-stone);" id="next-week-title">...</div>
+            </div>
+            <i class="fas fa-arrow-right" style="color: #cbd5e1; font-size: 1.5rem;"></i>
         </div>
     </main>
 </div>
@@ -122,176 +128,109 @@
 <script>
     const weeksData = {
         1: { 
-            m: 1, title: "Vítejte v týmu", desc: "Základní orientace na pobočce a administrativní start.", 
-            cekame: "Choreo pobočky, podpis smlouvy o adaptaci, stínování kolegů v provozu.",
-            studium: "Finanční gramotnost, Digi gramotnost (Moduly 1-3).", 
-            hasSesit: true, hasTriada: true,
-            webinar: { cas: "Středa 9:00", lektor: "Petr Rychlý" },
+            m: 1, color: 'var(--sporka-blue)', badge: 'ADAPTACE', title: "Vítejte v týmu", 
+            desc: "První krůčky, seznámení s týmem a nástroji.",
+            cekame: "Stínování na pobočce, Triáda 1, aktivace George ID.",
+            studium: "Index Digigram 1, Etický kodex, Bezpečnost v bance.",
+            webinar: { cas: "Středa 9:00 - 10:30", lektor: "Petr Rychlý" },
             prezencni: { den: "Čtvrtek", misto: "Školící centrum Praha", lektor: "Jana Moudrá" },
-            next: "Standardy servisu a 5* zážitek",
-            scot: {
-                learn: ["Znát základní uspořádání pobočky", "Mít aktivní přístupy do George", "Rozumět etickému kodexu"],
-                praxe: ["Zvládnout pozdrav a uvítání klienta", "Aktivně nabídnout kávu/vodu", "Představit se klientovi"]
-            }
+            scotL: ["Struktura banky", "Základní terminologie", "George prostředí"],
+            scotP: ["Uvítání klienta", "Obsluha kávovaru", "Small-talk standard"],
+            next: "Týden 2: Základy servisu a 5* zážitek"
         },
         2: { 
-            m: 1, title: "Standardy servisu", desc: "Jak budujeme vztahy a poskytujeme špičkový servis.", 
-            cekame: "Pochopení principů 5* servisu a první samostatné interakce.",
-            studium: "E-learning: Základy komunikačních dovedností, Kurz: 5 hvězdičkový servis.", 
-            hasSesit: true,
-            webinar: { cas: "Úterý 14:00", lektor: "Igor Metodik" },
-            prezencni: { den: "Pátek", misto: "Pobočka / Regionální hub", lektor: "Business Coach" },
-            next: "Práce s daty a CRM systémy",
-            scot: {
-                learn: ["Komunikační standardy George", "Jak řešit stížnosti", "Typologie klientů"],
-                praxe: ["Vedení small-talku", "Správná řeč těla", "Zjišťování klientských potřeb"]
-            }
-        },
-        // ... ostatní týdny se generují automaticky šablonou
+            m: 1, color: 'var(--sporka-blue)', badge: 'ADAPTACE', title: "Základy servisu", 
+            desc: "Jak děláme bankovnictví pro lidi.",
+            cekame: "Příchozí klient, práce s pořadníkovým systémem.",
+            studium: "Index Poradenství 1, Komunikační manuál.",
+            webinar: { cas: "Úterý 14:00 - 15:30", lektor: "Igor Metodik" },
+            prezencni: { den: "Pátek", misto: "Regionální hub", lektor: "Business Coach" },
+            scotL: ["Typologie klientů", "Standardy obsluhy"],
+            scotP: ["Zjišťování potřeb", "Práce s námitkami"],
+            next: "Týden 3: Úvěry a spotřebitelské financování"
+        }
+        // ... sem pak dodáš další týdny
     };
 
-    function initSidebar() {
+    function init() {
         const nav = document.getElementById('sidebar-nav');
-        let html = '';
-        const mColors = ['var(--m1-color)', 'var(--m2-color)', 'var(--m3-color)', 'var(--m4-color)'];
-        
-        for(let m=1; m<=4; m++) {
-            html += `<div class="month-card" style="border-top-color: ${mColors[m-1]}">
-                        <div class="month-title">Měsíc ${m}</div>`;
-            for(let w=1; w<=16; w++) {
-                const wM = Math.ceil(w/4);
-                if(wM === m) {
-                    html += `<a href="javascript:void(0)" onclick="loadWeek(${w})" id="w-btn-${w}" class="week-item">
-                                <span>Týden ${w}</span>
-                                <div class="status-dot"></div>
-                             </a>`;
-                }
+        let navHtml = '';
+        const months = [
+            { t: '1. Měsíc: Úvěry', c: 'var(--sporka-blue)' },
+            { t: '2. Měsíc: Pojištění', c: 'var(--sporka-orange)' },
+            { t: '3. Měsíc: Investice', c: 'var(--sporka-forest)' },
+            { t: '4. Měsíc: Finále', c: 'var(--sporka-aubergine)' }
+        ];
+
+        months.forEach((m, idx) => {
+            navHtml += `<div class="month-card" style="border-top-color: ${m.c}">
+                <div style="padding:10px 15px; font-size:0.7rem; font-weight:800; color:#666; background:#fafafa;">${m.t}</div>`;
+            for(let w=1; w<=4; w++) {
+                let wNum = (idx*4)+w;
+                navHtml += `<a href="javascript:void(0)" onclick="loadWeek(${wNum})" id="w-btn-${wNum}" class="week-item">
+                    <span>Týden ${wNum}</span><i class="fas fa-check-circle" style="color:#eee"></i>
+                </a>`;
             }
-            html += `</div>`;
-        }
-        nav.innerHTML = html;
+            navHtml += `</div>`;
+        });
+        nav.innerHTML = navHtml;
+        loadWeek(1);
     }
 
-    function loadWeek(num) {
-        const week = weeksData[num] || { 
-            m: Math.ceil(num/4), title: `Týden ${num}`, desc: "Rozvoj bankovních dovedností a prohlubování znalostí.",
-            cekame: "Pravidelné aktivity na pobočce a stínování zkušenějších.",
-            studium: "E-learningové moduly dle LMS a metodické listy.",
-            next: `Týden ${num+1}: Pokračování v odborném růstu`,
-            webinar: { cas: "Dle Outlooku", lektor: "Garant tématu" },
-            prezencni: { den: "Dle rozpisu", misto: "Pobočka", lektor: "Týmový manažer" },
-            scot: { learn: ["Odborné znalosti daného týdne"], praxe: ["Aplikace znalostí do hovoru"] }
-        };
-
-        // UI Updates
-        document.querySelectorAll('.week-item').forEach(el => el.classList.remove('active'));
-        document.getElementById(`w-btn-${num}`).classList.add('active');
+    function loadWeek(n) {
+        const w = weeksData[n] || weeksData[1];
         
-        const progress = Math.round((num / 16) * 100);
-        document.getElementById('main-progress').style.width = progress + '%';
-        document.getElementById('progress-percent').innerText = progress + '%';
-        document.getElementById('status-text').innerText = `Právě jsi v ${num}. týdnu (Fáze: ${num<=4?'Adaptace':num<=8?'ČBA Úvěry':num<=12?'Pojištění':'Investice'})`;
+        // Update UI
+        document.querySelectorAll('.week-item').forEach(el => el.classList.remove('active'));
+        document.getElementById(`w-btn-${n}`).classList.add('active');
+        
+        const prog = Math.round((n/16)*100);
+        document.getElementById('main-progress').style.width = prog + '%';
+        document.getElementById('percent-text').innerText = prog + '%';
 
-        const content = document.getElementById('dynamic-content');
-        const scotArea = document.getElementById('manager-scot-area');
-        const nextArea = document.getElementById('next-week-preview-area');
-
-        // Render Triada Banner
-        let triadHtml = week.hasTriada ? `
-            <div class="triad-banner">
-                <i class="fas fa-handshake-alt fa-2x"></i>
-                <div>
-                    <div style="font-weight: 800; font-size: 0.9rem;">TRIÁDA SESSION</div>
-                    <div style="font-size: 0.75rem; opacity: 0.9;">Tento týden proběhne společné setkání s tvým manažerem a coachem.</div>
-                </div>
-            </div>
-        ` : '';
-
-        // Render Sešit Card
-        let sesitHtml = week.hasSesit ? `
-            <div class="card">
-                <div class="card-h"><i class="fas fa-file-download"></i> Pracovní sešit</div>
-                <p style="font-size:0.8rem">Stáhni si podklady pro tento týden.</p>
-                <a href="#" class="btn-blue">Stáhnout sešit</a>
-                <div style="background:#fff9db; padding:8px; border-radius:6px; font-size:0.75rem; border-left:3px solid #f1c40f; margin-top:8px;"><strong>Tip:</strong> Ulož si ho do složky v PC.</div>
-            </div>
-        ` : `
-            <div class="card">
-                <div class="card-h"><i class="fas fa-file-invoice"></i> Pracovní sešit</div>
-                <p style="font-size:0.8rem; color:#666">Pokračuj v sešitu staženém v 1. nebo 2. týdnu. Najdeš ho v Knihovně dokumentů.</p>
-            </div>
-        `;
-
-        // Render Main Grid
-        content.innerHTML = `
-            <div class="card" style="margin-bottom:20px; border-left: 6px solid ${['var(--m1-color)','var(--m2-color)','var(--m3-color)','var(--m4-color)'][week.m-1]}">
-                <h2 style="margin:0; color:var(--george-blue); font-size: 1.2rem;">Týden ${num}: ${week.title}</h2>
-                <p style="color:#64748b; font-size: 0.85rem; margin-top: 5px;">${week.desc}</p>
-            </div>
-            ${triadHtml}
-            <div class="dashboard-grid">
-                <div class="card"><div class="card-h"><i class="fas fa-bullseye"></i> Co mě čeká</div><p style="font-size: 0.8rem;">${week.cekame}</p></div>
-                <div class="card"><div class="card-h"><i class="fas fa-laptop-code"></i> Samostudium</div><p style="font-size: 0.8rem;">${week.studium}</p></div>
-                ${sesitHtml}
+        // Update Content
+        document.getElementById('week-content').innerHTML = `
+            <div class="faze-badge" style="background:${w.color}">${w.badge}</div>
+            <h1 style="margin: 0 0 10px 0; color:var(--sporka-stone)">Týden ${n}: ${w.title}</h1>
+            <p style="color:#64748b; margin-bottom:25px;">${w.desc}</p>
+            
+            <div class="grid-2">
                 <div class="card">
-                    <div class="card-h"><i class="fas fa-video"></i> Ověřovací webinář</div>
-                    <p style="font-size: 0.75rem; color:#666">Metodické ukotvení a zodpovězení dotazů.</p>
-                    <div class="org-box">
-                        <div class="org-line"><i class="fas fa-clock"></i> <strong>Kdy:</strong> ${week.webinar.cas}</div>
-                        <div class="org-line"><i class="fas fa-user"></i> <strong>Lektor:</strong> ${week.webinar.lektor}</div>
-                    </div>
-                    <a href="#" class="btn-blue btn-teams"><i class="fab fa-microsoft"></i> Vstoupit (Teams)</a>
-                </div>
-                <div class="card">
-                    <div class="card-h"><i class="fas fa-users-class"></i> Prezenční den</div>
-                    <p style="font-size: 0.75rem; color:#666">Trénink dovedností nanečisto.</p>
-                    <div class="org-box">
-                        <div class="org-line"><i class="fas fa-calendar-check"></i> <strong>Den:</strong> ${week.prezencni.den}</div>
-                        <div class="org-line"><i class="fas fa-map-marker-alt"></i> <strong>Místo:</strong> ${week.prezencni.misto}</div>
+                    <div class="card-h"><i class="fas fa-bullseye"></i> Co mě čeká</div>
+                    <p style="font-size:0.85rem;">${w.cekame}</p>
+                    <div class="info-box">
+                        <div class="info-line"><i class="fas fa-file-alt"></i> <strong>Pracovní sešit:</strong> Vyplnit do pátku</div>
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-h"><i class="fas fa-clipboard-check"></i> Potvrzení týdne</div>
-                    <div class="thumbs-row">
-                        <div class="thumb-unit" onclick="this.classList.toggle('active')"><i class="fas fa-user-tie"></i><br>Manager</div>
-                        <div class="thumb-unit" onclick="this.classList.toggle('active')"><i class="fas fa-bullseye"></i><br>Coach</div>
-                        <div class="thumb-unit" onclick="this.classList.toggle('active')"><i class="fas fa-user"></i><br>Bankéř</div>
+                    <div class="card-h"><i class="fas fa-graduation-cap"></i> Samostudium</div>
+                    <p style="font-size:0.85rem;">${w.studium}</p>
+                </div>
+                <div class="card">
+                    <div class="card-h"><i class="fas fa-desktop"></i> Ověřovací webinář</div>
+                    <div class="info-box">
+                        <div class="info-line"><i class="fas fa-clock"></i> <strong>Čas:</strong> ${w.webinar.cas}</div>
+                        <div class="info-line"><i class="fas fa-user-tie"></i> <strong>Lektor:</strong> ${w.webinar.lektor}</div>
+                    </div>
+                    <a href="https://teams.microsoft.com" class="btn-teams"><i class="fab fa-microsoft"></i> Připojit se k Teams</a>
+                </div>
+                <div class="card">
+                    <div class="card-h"><i class="fas fa-map-marker-alt"></i> Prezenční den</div>
+                    <div class="info-box">
+                        <div class="info-line"><i class="fas fa-calendar-alt"></i> <strong>Kdy:</strong> ${w.prezencni.den}</div>
+                        <div class="info-line"><i class="fas fa-map-pin"></i> <strong>Kde:</strong> ${w.prezencni.misto}</div>
                     </div>
                 </div>
             </div>
         `;
 
-        // Render Manager Sčot
-        scotArea.innerHTML = `
-            <div class="scot-box">
-                <div class="scot-title"><i class="fas fa-briefcase"></i> MANAŽERSKÝ SČOT (Cíle pro tento týden)</div>
-                <div class="scot-grid">
-                    <div class="scot-item">
-                        <strong>Co se má naučit:</strong>
-                        <ul class="scot-list">${week.scot.learn.map(li => `<li>${li}</li>`).join('')}</ul>
-                    </div>
-                    <div class="scot-item">
-                        <strong>Na co se zaměřit v praxi:</strong>
-                        <ul class="scot-list">${week.scot.praxe.map(li => `<li>${li}</li>`).join('')}</ul>
-                    </div>
-                </div>
-            </div>
-        `;
-
-        // Render Next Week Preview
-        nextArea.innerHTML = `
-            <div class="next-week-card">
-                <div>
-                    <div class="next-label">Výhled na příští týden</div>
-                    <div style="font-weight: 700; color: var(--george-blue);">${week.next}</div>
-                </div>
-                <i class="fas fa-arrow-right" style="color: var(--george-light);"></i>
-            </div>
-        `;
+        // Update Scot and Next
+        document.getElementById('scot-learn').innerHTML = w.scotL.map(i => `<li>${i}</li>`).join('');
+        document.getElementById('scot-practice').innerHTML = w.scotP.map(i => `<li>${i}</li>`).join('');
+        document.getElementById('next-week-title').innerText = w.next;
     }
 
-    initSidebar();
-    loadWeek(1); // Defaultní start
+    init();
 </script>
 
 </body>
