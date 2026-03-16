@@ -30,6 +30,8 @@
         .thumb { flex: 1; border: 1px solid #ddd; padding: 12px; text-align: center; border-radius: 10px; cursor: pointer; font-weight: 800; background: #fafafa; font-size: 0.7rem; }
         .thumb.on { background: #e8f5e9; border-color: #4caf50; color: #2e7d32; }
         .btn { background: var(--blue); color: white; padding: 12px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; text-decoration: none; display: inline-block; }
+        .back-btn { background: #eee; color: #666; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; font-weight: bold; display: flex; align-items: center; gap: 8px; border: 1px solid #ddd; }
+        .back-btn:hover { background: #e5e5e5; }
     </style>
 </head>
 <body>
@@ -44,7 +46,7 @@
 
 <div class="layout">
     <nav>
-        <div class="home-link" id="home-btn" onclick="showHome()"><i class="fas fa-home"></i> ÚVODNÍ SLOVNAK</div>
+        <div class="home-link" id="home-btn" onclick="showHome()"><i class="fas fa-home"></i> ÚVODNÍ STRANA</div>
         <div id="menu"></div>
     </nav>
 
@@ -96,7 +98,7 @@
     function showHome() {
         activeView = 'home';
         document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-        document.getElementById('home-btn').style.opacity = "1";
+        document.getElementById('home-btn').style.background = "var(--blue)";
         
         document.getElementById('main-content').innerHTML = `
             <div class="card full" style="background:var(--stone); color:white; margin-bottom:20px;">
@@ -117,7 +119,7 @@
                     <p>Bez splnění <b>Pracovního sešitu</b> a samostudia v LMS se nemůžeš účastnit Ověřovacích webinářů. Příprava je klíčem k tvému úspěchu. Držíme ti palce!</p>
                 </div>
                 <div class="card full" style="text-align:center; padding:40px;">
-                    <button class="btn" onclick="loadWeek(1)" style="padding:15px 40px; font-size:1.2rem;">ZAČNÍT 1. TÝDNEM <i class="fas fa-chevron-right"></i></button>
+                    <button class="btn" onclick="loadWeek(1)" style="padding:15px 40px; font-size:1.2rem;">1. TÝDEN <i class="fas fa-chevron-right"></i></button>
                 </div>
             </div>
         `;
@@ -125,15 +127,18 @@
 
     function loadWeek(n) {
         activeView = n;
-        document.getElementById('home-btn').style.opacity = "0.7";
+        document.getElementById('home-btn').style.background = "var(--stone)";
         document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
         document.getElementById('menu-' + n).classList.add('active');
 
         const w = data[n] || { title: "Týden "+n, know:[], skills:[], do:[], study:[], next:"V přípravě" };
 
         document.getElementById('main-content').innerHTML = `
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                <h2 style="font-size:2rem; margin:0;">${w.title}</h2>
+                <div class="back-btn" onclick="showHome()"><i class="fas fa-arrow-left"></i> ZPĚT NA ÚVOD</div>
+            </div>
             ${n === 1 ? `<div class="triada"><h3><i class="fas fa-handshake"></i> I. Triáda (Smlouva o adaptaci)</h3><p>Nastavení spolupráce: bankéř – manažer – kouč</p></div>` : ''}
-            <h2 style="font-size:2rem; margin-bottom:20px;">${w.title}</h2>
             <div class="bento">
                 <div class="card full" style="border-top:6px solid var(--orange)">
                     <h3><i class="fas fa-flag" style="color:var(--orange)"></i> Cíle týdne</h3>
