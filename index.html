@@ -3,87 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>George Onboarding | Martin Experience</title>
+    <title>George Onboarding | Martin Experience 4.0</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root {
             --sporka-blue: #2870ED; --sporka-teal: #02A3A4; --sporka-apple: #0CB43F;
             --sporka-orange: #FF6130; --sporka-aubergine: #721C7A; --sporka-stone: #245375;
-            --bg: #F0F4F8; --white: #ffffff; --radius: 20px;
+            --bg: #F0F4F8; --card-bg: #ffffff; --text: #1E293B; --border: rgba(0,0,0,0.08);
+            --header-grad: linear-gradient(135deg, var(--sporka-stone) 0%, #1a3a52 100%);
         }
 
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: #1E293B; margin: 0; }
+        [data-theme="dark"] {
+            --bg: #0F172A; --card-bg: #1E293B; --text: #F1F5F9; --border: rgba(255,255,255,0.1);
+        }
+
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; transition: background 0.3s, color 0.3s; }
 
         header { 
-            background: linear-gradient(135deg, var(--sporka-stone) 0%, #1a3a52 100%); 
-            padding: 20px 5%; display: flex; justify-content: space-between; align-items: center;
-            color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            background: var(--header-grad); 
+            padding: 15px 5%; display: flex; justify-content: space-between; align-items: center;
+            color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
-        .user-profile { display: flex; align-items: center; gap: 20px; }
-        .avatar { width: 55px; height: 55px; background: var(--sporka-blue); border-radius: 50%; border: 3px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800; }
-        
-        .trophy-case { display: flex; gap: 10px; margin-top: 8px; }
-        .trophy { width: 32px; height: 32px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; color: rgba(255,255,255,0.3); transition: 0.5s; }
-        .trophy.active { color: #FFD700; background: rgba(255,255,255,0.25); box-shadow: 0 0 15px rgba(255,215,0,0.4); }
 
-        .container { max-width: 1440px; margin: 30px auto; padding: 0 25px; display: grid; grid-template-columns: 320px 1fr; gap: 40px; }
+        .avatar { width: 45px; height: 45px; background: var(--sporka-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; border: 2px solid rgba(255,255,255,0.2); }
+        
+        .trophy-case { display: flex; gap: 8px; margin-top: 5px; }
+        .trophy { width: 32px; height: 32px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.2); transition: 0.5s; font-size: 0.9rem; }
+        .trophy.active { color: #FFD700; background: rgba(255,255,255,0.2); box-shadow: 0 0 15px rgba(255,215,0,0.4); transform: scale(1.1); }
+
+        .theme-toggle { cursor: pointer; font-size: 1.4rem; transition: 0.3s; margin-left: 20px; }
+        .theme-toggle:hover { color: var(--sporka-teal); transform: rotate(15deg); }
+
+        .container { max-width: 1400px; margin: 30px auto; padding: 0 20px; display: grid; grid-template-columns: 300px 1fr; gap: 30px; }
         
         /* SIDEBAR */
         .sidebar { display: flex; flex-direction: column; gap: 20px; }
-        .month-box { background: white; border-radius: var(--radius); overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .month-header { padding: 15px 20px; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: #64748B; background: #F8FAFC; border-bottom: 1px solid #F1F5F9; }
-        .week-item { display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; text-decoration: none; color: #475569; font-weight: 600; border-bottom: 1px solid #F1F5F9; transition: 0.3s; }
-        .week-item:hover { background: #f0f7ff; }
+        .month-box { background: var(--card-bg); border-radius: 16px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .month-header { padding: 12px 15px; font-weight: 800; font-size: 0.65rem; text-transform: uppercase; opacity: 0.6; background: rgba(0,0,0,0.03); }
+        .week-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 15px; text-decoration: none; color: inherit; font-size: 0.9rem; font-weight: 600; border-bottom: 1px solid var(--border); transition: 0.2s; }
         .week-item.active { background: var(--sporka-blue); color: white; }
-        .week-item.completed { background: #ECFDF5; color: var(--sporka-apple); border-left: 6px solid var(--sporka-apple); }
+        .week-item.completed { background: rgba(12, 180, 63, 0.1); color: var(--sporka-apple); border-left: 5px solid var(--sporka-apple); }
+
+        /* CARDS */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px; }
+        .sexy-card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 8px 25px rgba(0,0,0,0.05); transition: 0.3s; }
+        .sexy-card:hover { transform: translateY(-3px); }
+        .card-header { padding: 12px 20px; color: white; font-weight: 700; font-size: 0.85rem; display: flex; align-items: center; gap: 10px; }
+        .card-body { padding: 20px; font-size: 0.85rem; line-height: 1.5; }
 
         /* VIDEO */
-        #hero-video { width: 100%; height: 200px; background: #000; border-radius: var(--radius); margin-bottom: 30px; position: relative; display: none; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
-        .video-overlay { position: absolute; background: rgba(0,73,122,0.6); width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; text-align: center; }
+        #hero-video { width: 100%; height: 180px; background: #000; border-radius: 20px; margin-bottom: 25px; display: none; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .video-overlay { position: absolute; background: rgba(0,73,122,0.6); width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; }
 
-        /* DLAŽDICE - SEXY STYLE */
-        .sexy-card { background: white; border-radius: var(--radius); overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.05); transition: 0.3s; }
-        .sexy-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
-        .card-header { padding: 15px 20px; color: white; font-weight: 700; display: flex; align-items: center; gap: 10px; font-size: 0.9rem; letter-spacing: 0.5px; }
-        .card-body { padding: 20px; font-size: 0.85rem; color: #334155; line-height: 1.5; }
+        /* OVĚŘOVACÍ STANICE */
+        .verification-zone { background: rgba(40, 112, 237, 0.05); padding: 25px; border-radius: 20px; border: 2px dashed var(--sporka-blue); text-align: center; margin-top: 10px; }
+        .thumbs-flex { display: flex; gap: 12px; justify-content: center; margin-top: 15px; }
+        .thumb-btn { flex: 1; max-width: 120px; background: var(--card-bg); padding: 12px; border-radius: 12px; border: 2px solid var(--border); cursor: pointer; transition: 0.3s; filter: grayscale(1); text-align: center; }
+        .thumb-btn.active { filter: grayscale(0); border-color: var(--sporka-apple); background: rgba(12, 180, 63, 0.1); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(12,180,63,0.2); }
+        .thumb-btn i { font-size: 1.4rem; display: block; margin-bottom: 5px; }
+        .thumb-btn span { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; }
 
-        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 25px; }
-
-        /* MANAŽERSKÝ SČOT */
-        .scot-panel { background: #F8FAFC; padding: 25px; border-radius: var(--radius); border: 1px solid #E2E8F0; margin-bottom: 20px; }
-        .scot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
-        .scot-title { font-weight: 800; font-size: 0.75rem; color: #64748B; margin-bottom: 10px; text-transform: uppercase; }
-        .scot-list { margin: 0; padding-left: 18px; color: #1E293B; }
-
-        /* OVĚŘOVACÍ STANICE (PALCE) */
-        .verification-zone { background: #EEF2FF; padding: 25px; border-radius: var(--radius); border: 1px solid #E0E7FF; text-align: center; margin-bottom: 40px; }
-        .verification-zone h3 { margin-top: 0; font-size: 1rem; color: var(--sporka-stone); }
-        .thumbs-flex { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }
-        
-        .thumb-btn { 
-            flex: 1; max-width: 140px; background: white; padding: 15px; border-radius: 15px; border: 2px solid #D1D5DB; 
-            cursor: pointer; transition: 0.3s; text-align: center; filter: grayscale(1); opacity: 0.6;
-        }
-        .thumb-btn.active { 
-            filter: grayscale(0); opacity: 1; border-color: var(--sporka-apple); background: #f0fff4; 
-            transform: translateY(-5px); box-shadow: 0 10px 20px rgba(12,180,63,0.15); 
-        }
-        .thumb-btn i { font-size: 1.5rem; color: #64748B; margin-bottom: 8px; display: block; }
-        .thumb-btn.active i { color: var(--sporka-apple); }
-        .thumb-btn span { font-size: 0.7rem; font-weight: 800; color: #475569; text-transform: uppercase; }
-
-        .btn-link { background: var(--sporka-blue); color: white; text-align: center; padding: 10px; border-radius: 10px; text-decoration: none; display: block; font-weight: 600; margin-top: 15px; transition: 0.3s; }
-        .btn-link:hover { opacity: 0.9; transform: scale(1.02); }
+        /* MOOD METER */
+        .mood-meter { display: flex; justify-content: center; gap: 20px; margin-top: 15px; font-size: 1.5rem; border-top: 1px solid var(--border); padding-top: 15px; }
+        .mood-meter span { cursor: pointer; opacity: 0.4; transition: 0.2s; }
+        .mood-meter span:hover { transform: scale(1.3); opacity: 1; }
     </style>
 </head>
-<body>
+<body id="page-body">
 
 <header>
-    <div class="user-profile">
+    <div style="display: flex; align-items: center; gap: 15px;">
         <div class="avatar">M</div>
         <div>
-            <div style="font-size: 1.2rem; font-weight: 800;">Ahoj, Martine! 👋</div>
+            <div style="font-size: 1rem; font-weight: 800;">Ahoj, Martine! 🚀</div>
             <div class="trophy-case">
                 <div class="trophy" id="t-1"><i class="fas fa-award"></i></div>
                 <div class="trophy" id="t-2"><i class="fas fa-shield-alt"></i></div>
@@ -92,11 +86,14 @@
             </div>
         </div>
     </div>
-    <div style="text-align: right">
-        <div style="font-size: 0.7rem; font-weight: 800; opacity: 0.8; margin-bottom: 5px;">CELKOVÁ ADAPTACE</div>
-        <div style="width: 250px; height: 10px; background: rgba(255,255,255,0.1); border-radius: 5px; overflow: hidden;">
-            <div id="main-progress" style="width: 0%; height: 100%; background: var(--sporka-teal); transition: 1s;"></div>
+    <div style="display: flex; align-items: center;">
+        <div style="text-align: right; margin-right: 20px;">
+            <div style="font-size: 0.6rem; opacity: 0.7; font-weight: 800;">TVŮJ PROGRES</div>
+            <div style="width: 150px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                <div id="p-bar" style="width: 0%; height: 100%; background: var(--sporka-teal); transition: 1s;"></div>
+            </div>
         </div>
+        <i class="fas fa-moon theme-toggle" id="theme-icon" onclick="toggleTheme()"></i>
     </div>
 </header>
 
@@ -106,81 +103,51 @@
     <main>
         <div id="hero-video">
             <div class="video-overlay">
-                <div style="width: 50px; height: 50px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--sporka-blue); margin-bottom: 10px;"><i class="fas fa-play"></i></div>
-                <h3 style="margin: 0;">Vítej v týmu! <br>Tvůj první den začíná zde.</h3>
+                <i class="fas fa-play-circle fa-3x" style="margin-bottom: 10px; cursor: pointer;"></i>
+                <h3 style="margin:0">Vítej v České spořitelně!</h3>
             </div>
         </div>
 
-        <h1 id="week-title" style="color: var(--sporka-stone); margin-bottom: 5px;">Načítám...</h1>
-        <p id="week-desc" style="color: #64748B; margin-bottom: 30px;"></p>
+        <h1 id="week-title" style="margin: 0 0 20px 0;">Načítám týden...</h1>
 
         <div class="grid-2">
             <div class="sexy-card">
-                <div class="card-header" style="background: linear-gradient(90deg, var(--sporka-stone), #3a5b74)"><i class="fas fa-eye"></i> Co mě čeká</div>
-                <div class="card-body" id="cekame-text"></div>
+                <div class="card-header" style="background: var(--sporka-stone)"><i class="fas fa-eye"></i> Co mě čeká</div>
+                <div class="card-body" id="c-wait"></div>
             </div>
             <div class="sexy-card">
-                <div class="card-header" style="background: linear-gradient(90deg, var(--sporka-blue), #508df5)"><i class="fas fa-laptop-code"></i> Samostudium</div>
-                <div class="card-body" id="studium-text"></div>
-            </div>
-
-            <div class="sexy-card">
-                <div class="card-header" style="background: linear-gradient(90deg, var(--sporka-aubergine), #92309c)"><i class="fas fa-users"></i> Prezenční trénink</div>
+                <div class="card-header" style="background: var(--sporka-aubergine)"><i class="fas fa-users"></i> Prezenční trénink</div>
                 <div class="card-body">
-                    <div style="margin-bottom: 10px;"><strong style="color:var(--sporka-aubergine);">Téma:</strong> <span id="prez-tema"></span></div>
-                    <div style="font-size: 0.8rem;">
-                        <i class="fas fa-calendar-alt"></i> <span id="prez-cas"></span><br>
-                        <i class="fas fa-map-marker-alt"></i> <span id="prez-misto"></span><br>
-                        <i class="fas fa-user-tie"></i> <span id="prez-lektor"></span>
-                    </div>
+                    <strong id="p-topic"></strong><br>
+                    <span id="p-info" style="font-size: 0.8rem; color: #64748B;"></span>
                 </div>
             </div>
-
             <div class="sexy-card">
-                <div class="card-header" style="background: linear-gradient(90deg, var(--sporka-teal), #00c4c5)"><i class="fab fa-microsoft"></i> Ověřovací webinář</div>
-                <div class="card-body">
-                    <div id="webinar-info" style="background: #F8FAFC; padding: 12px; border-radius: 10px; margin-bottom: 10px;"></div>
-                    <a href="#" class="btn-link">Vstoupit do Teams</a>
-                </div>
+                <div class="card-header" style="background: var(--sporka-blue)"><i class="fas fa-book-open"></i> Samostudium</div>
+                <div class="card-body" id="c-study"></div>
+            </div>
+            <div class="sexy-card">
+                <div class="card-header" style="background: var(--sporka-teal)"><i class="fab fa-microsoft"></i> Webinář</div>
+                <div class="card-body" id="c-webinar"></div>
             </div>
 
-            <div class="sexy-card" style="grid-column: span 2;">
-                <div class="card-header" style="background: linear-gradient(90deg, var(--sporka-orange), #ff8c66)"><i class="fas fa-map-pin"></i> Úkol týdne: Mapa pobočky</div>
-                <div class="card-body" style="display: flex; gap: 20px; align-items: center;">
-                    <div style="flex: 1; background: #F1F5F9; height: 100px; border-radius: 15px; display: flex; align-items: center; justify-content: center; border: 2px dashed #CBD5E1;">
-                        <i class="fas fa-compass fa-3x" style="color: #CBD5E1;"></i>
-                    </div>
-                    <div style="flex: 2;">
-                        <h4 style="margin: 0 0 5px 0; color: var(--sporka-orange);">Tvá mise v terénu:</h4>
-                        <p id="ukol-text" style="margin: 0;"></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="scot-panel" style="grid-column: span 2;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                    <h3 style="margin:0; font-size: 1rem; color: var(--sporka-stone);"><i class="fas fa-clipboard-check"></i> MANAŽERSKÝ SČOT</h3>
-                    <div style="font-size: 0.65rem; font-weight: 800; background: var(--sporka-teal); color: white; padding: 4px 12px; border-radius: 20px;">CÍLE TÝDNE</div>
-                </div>
-                <div class="scot-grid">
-                    <div>
-                        <div class="scot-title">Nováček zná:</div>
-                        <ul class="scot-list" id="scot-learn"></ul>
-                    </div>
-                    <div>
-                        <div class="scot-title">Nováček v praxi dělá:</div>
-                        <ul class="scot-list" id="scot-practice"></ul>
-                    </div>
+            <div class="sexy-card" style="grid-column: span 2; border-left: 6px solid var(--sporka-blue);">
+                <div class="card-header" style="background: var(--sporka-blue)">MANAŽERSKÝ SČOT (CÍLE TÝDNE)</div>
+                <div class="card-body grid-2" style="margin-bottom:0; padding-top: 15px;">
+                    <div><strong>Znalosti:</strong><ul id="s-know" style="padding-left:15px; margin-top:5px;"></ul></div>
+                    <div><strong>Praxe:</strong><ul id="s-do" style="padding-left:15px; margin-top:5px;"></ul></div>
                 </div>
             </div>
 
             <div class="verification-zone" style="grid-column: span 2;">
-                <h3><i class="fas fa-star" style="color:#FFD700;"></i> Potvrzení a uzavření týdne</h3>
-                <p style="font-size: 0.8rem; color: #64748B;">Pro splnění týdne je nutné potvrzení všech tří stran.</p>
+                <h4 style="margin:0; font-size: 0.9rem;">TRIÁDA: POTVRZENÍ SPLNĚNÍ TÝDNE</h4>
                 <div class="thumbs-flex">
-                    <div class="thumb-btn" onclick="toggleThumb(this)"><i class="fas fa-user-tie"></i><span>Manažer</span></div>
-                    <div class="thumb-btn" onclick="toggleThumb(this)"><i class="fas fa-graduation-cap"></i><span>Coach</span></div>
-                    <div class="thumb-btn" onclick="toggleThumb(this)"><i class="fas fa-user"></i><span>Martin</span></div>
+                    <div class="thumb-btn" onclick="toggleThumb(this, 0)"><i class="fas fa-user-tie"></i><span>Manažer</span></div>
+                    <div class="thumb-btn" onclick="toggleThumb(this, 1)"><i class="fas fa-graduation-cap"></i><span>Coach</span></div>
+                    <div class="thumb-btn" onclick="toggleThumb(this, 2)"><i class="fas fa-user-check"></i><span>Martin</span></div>
+                </div>
+                <div class="mood-meter">
+                    <span title="Super!">🚀</span><span title="Fajn">😊</span><span title="Ujde to">😐</span><span title="Moc informací">🥵</span>
                 </div>
             </div>
         </div>
@@ -188,96 +155,90 @@
 </div>
 
 <script>
-    const data = {
-        1: {
-            title: "Startujeme v České spořitelně",
-            desc: "Tvůj první týden je o lidech, kultuře a pochopení George světa.",
-            cekame: "Choreo pobočky, aktivace George ID, první stínování u poradce.",
-            studium: "Index Digigram 1, Etický kodex, Bezpečnost v bance.",
-            webinar: "Středa 9:00 | Petr Rychlý",
-            ukol: "Projdi si pobočku a najdi 5 míst, kde klienti nejčastěji potřebují pomoc (vkladomat, terminál...).",
-            prezTema: "Úvod do firemní kultury",
-            prezCas: "Čtvrtek 10:00 - 15:00",
-            prezMisto: "Praha, Budějovická 1",
-            prezLektor: "Jana Moudrá",
-            scotL: ["Vize a hodnoty banky", "Základní terminologie", "Bezpečnostní standardy"],
-            scotP: ["Uvítání klienta", "Doprovod k samoobslužné zóně"]
+    // DATA PRO TÝDNY
+    const weeksData = {
+        1: { 
+            title: "Startujeme!", wait: "Seznámení s týmem, George přístupy, podpis smlouvy.", 
+            study: "Etický kodex, Bezpečnost, Index Digigram 1.", webinar: "Pondělí 9:00 - Úvod", 
+            pTopic: "Kultura a vize CS", pInfo: "Čtvrtek | Praha | Lektor: Jana M.",
+            know: ["Historie banky", "George ekosystém"], do: ["Uvítání klienta", "Choreo pobočky"]
         },
-        2: {
-            title: "Standardy 5* obsluhy",
-            desc: "Jak z každé interakce udělat zážitek pro klienta.",
-            cekame: "Samostatné uvítání, práce s vyvolávacím systémem, stínování úvěrů.",
-            studium: "Komunikační manuál, Video: Empatie v prodeji.",
-            webinar: "Úterý 14:00 | Lucie Hubová",
-            ukol: "Vyzkoušej si aktivní oslovení 3 klientů v hale a zeptej se na jejich dnešní zkušenost.",
-            prezTema: "Komunikační dovednosti",
-            prezCas: "Pátek 9:00 - 16:00",
-            prezMisto: "Regionální tréninkové centrum",
-            prezLektor: "Michal Coach",
-            scotL: ["Typologie klientů", "Standardy 5* servisu"],
-            scotP: ["Aktivní naslouchání", "Zjišťování potřeb (Small-talk)"]
+        2: { 
+            title: "5* Servis", wait: "Práce v hale, stínování u pokladny.", 
+            study: "Typologie klientů, Komunikační manuál.", webinar: "Středa 13:00 - Servis", 
+            pTopic: "Komunikační dovednosti", pInfo: "Pátek | Region | Lektor: Petr S.",
+            know: ["Standardy obsluhy"], do: ["Aktivní oslovení", "Zjištění potřeb"]
         }
     };
 
-    function initSidebar() {
-        const nav = document.getElementById('sidebar-nav');
-        const months = ["Úvěry", "Pojištění", "Investice", "Certifikace"];
+    let activeWeek = 1;
+    let weekStatus = JSON.parse(localStorage.getItem('george-progress')) || {};
+
+    function init() {
+        const side = document.getElementById('sidebar-nav');
+        const months = ["Základy", "Úvěry", "Pojištění", "Investice"];
         let html = '';
         for(let m=0; m<4; m++) {
             html += `<div class="month-box"><div class="month-header">${m+1}. Měsíc: ${months[m]}</div>`;
             for(let w=1; w<=4; w++) {
-                let wNum = (m*4)+w;
-                html += `<a href="javascript:void(0)" class="week-item" id="w-${wNum}" onclick="loadWeek(${wNum})">Týden ${wNum} <i class="fas fa-check-circle" style="opacity:0.2"></i></a>`;
+                let id = (m*4)+w;
+                let isDone = weekStatus[id] && weekStatus[id].every(v => v === true);
+                html += `<a href="#" class="week-item ${isDone?'completed':''}" id="w-${id}" onclick="loadWeek(${id})">Týden ${id} <i class="fas fa-check-circle" style="opacity:${isDone?1:0.2}"></i></a>`;
             }
             html += `</div>`;
         }
-        nav.innerHTML = html;
+        side.innerHTML = html;
+        loadWeek(1);
+        checkTrophies();
     }
 
     function loadWeek(n) {
-        document.querySelectorAll('.week-item').forEach(el => el.classList.remove('active'));
+        activeWeek = n;
+        document.querySelectorAll('.week-item').forEach(e => e.classList.remove('active'));
         document.getElementById(`w-${n}`).classList.add('active');
-
-        const w = data[n] || data[2]; // Fallback na data nebo default
         
+        // Video jen pro 1. týden
         document.getElementById('hero-video').style.display = (n === 1) ? 'flex' : 'none';
-        document.getElementById('week-title').innerText = `Týden ${n}: ${w.title}`;
-        document.getElementById('week-desc').innerText = w.desc;
-        document.getElementById('cekame-text').innerText = w.cekame;
-        document.getElementById('studium-text').innerText = w.studium;
-        document.getElementById('webinar-info').innerHTML = `<strong>Termín:</strong> ${w.webinar}`;
-        document.getElementById('ukol-text').innerText = w.ukol;
-        
-        // Prezenční trénink
-        document.getElementById('prez-tema').innerText = w.prezTema;
-        document.getElementById('prez-cas').innerText = w.prezCas;
-        document.getElementById('prez-misto').innerText = w.prezMisto;
-        document.getElementById('prez-lektor').innerText = w.prezLektor;
 
-        // Sčot
-        document.getElementById('scot-learn').innerHTML = w.scotL.map(i => `<li>${i}</li>`).join('');
-        document.getElementById('scot-practice').innerHTML = w.scotP.map(i => `<li>${i}</li>`).join('');
+        const w = weeksData[n] || weeksData[1];
+        document.getElementById('week-title').innerText = `Týden ${n}: ${w.title}`;
+        document.getElementById('c-wait').innerText = w.wait;
+        document.getElementById('c-study').innerText = w.study;
+        document.getElementById('c-webinar').innerText = w.webinar;
+        document.getElementById('p-topic').innerText = w.pTopic;
+        document.getElementById('p-info').innerText = w.pInfo;
+        document.getElementById('s-know').innerHTML = w.know.map(i => `<li>${i}</li>`).join('');
+        document.getElementById('s-do').innerHTML = w.do.map(i => `<li>${i}</li>`).join('');
         
-        document.getElementById('main-progress').style.width = (n/16*100) + '%';
-        
-        // Reset palců (simulace nového načtení)
-        document.querySelectorAll('.thumb-btn').forEach(b => b.classList.remove('active'));
+        // Načtení palců z paměti
+        const thumbs = document.querySelectorAll('.thumb-btn');
+        const saved = weekStatus[n] || [false, false, false];
+        thumbs.forEach((btn, idx) => {
+            btn.classList.toggle('active', saved[idx]);
+        });
+
+        document.getElementById('p-bar').style.width = (n/16*100) + '%';
     }
 
-    function toggleThumb(el) {
-        el.classList.toggle('active');
-        const activeCount = document.querySelectorAll('.thumb-btn.active').length;
-        const currentWeekBtn = document.querySelector('.week-item.active');
+    function toggleThumb(btn, idx) {
+        btn.classList.toggle('active');
+        if(!weekStatus[activeWeek]) weekStatus[activeWeek] = [false, false, false];
+        weekStatus[activeWeek][idx] = btn.classList.contains('active');
         
-        if(activeCount === 3) {
-            currentWeekBtn.classList.add('completed');
-            currentWeekBtn.querySelector('i').style.opacity = "1";
-            currentWeekBtn.querySelector('i').style.color = "var(--sporka-apple)";
+        localStorage.setItem('george-progress', JSON.stringify(weekStatus));
+
+        if(weekStatus[activeWeek].every(v => v === true)) {
+            // KONFETY!
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#2870ED', '#0CB43F', '#FFD700'] });
+            
+            let item = document.getElementById(`w-${activeWeek}`);
+            item.classList.add('completed');
+            item.querySelector('i').style.opacity = "1";
             checkTrophies();
         } else {
-            currentWeekBtn.classList.remove('completed');
-            currentWeekBtn.querySelector('i').style.opacity = "0.2";
-            currentWeekBtn.querySelector('i').style.color = "inherit";
+            document.getElementById(`w-${activeWeek}`).classList.remove('completed');
+            document.getElementById(`w-${activeWeek}`).querySelector('i').style.opacity = "0.2";
+            checkTrophies();
         }
     }
 
@@ -285,14 +246,26 @@
         for(let m=0; m<4; m++) {
             let monthDone = true;
             for(let w=1; w<=4; w++) {
-                if(!document.getElementById(`w-${(m*4)+w}`).classList.contains('completed')) monthDone = false;
+                let id = (m*4)+w;
+                if(!weekStatus[id] || !weekStatus[id].every(v => v === true)) monthDone = false;
             }
-            if(monthDone) document.getElementById(`t-${m+1}`).classList.add('active');
+            document.getElementById(`t-${m+1}`).classList.toggle('active', monthDone);
         }
     }
 
-    initSidebar();
-    loadWeek(1);
+    function toggleTheme() {
+        const body = document.getElementById('page-body');
+        const icon = document.getElementById('theme-icon');
+        if(body.getAttribute('data-theme') === 'dark') {
+            body.removeAttribute('data-theme');
+            icon.className = 'fas fa-moon theme-toggle';
+        } else {
+            body.setAttribute('data-theme', 'dark');
+            icon.className = 'fas fa-sun theme-toggle';
+        }
+    }
+
+    init();
 </script>
 </body>
 </html>
