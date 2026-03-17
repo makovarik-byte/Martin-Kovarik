@@ -16,77 +16,58 @@
             color: white; padding: 1.2rem 5%; display: flex; justify-content: space-between; 
             align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
-        .progress-container { text-align: right; width: 250px; }
-        .progress-bar-bg { height: 12px; background: rgba(255,255,255,0.2); border-radius: 20px; margin-top: 6px; overflow: hidden; }
-        #progress-fill { height: 100%; width: 20%; background: var(--teal); box-shadow: 0 0 10px var(--teal); transition: 1s ease; }
+        .progress-bar-bg { width: 200px; height: 12px; background: rgba(255,255,255,0.2); border-radius: 20px; margin-top: 6px; overflow: hidden; }
+        #progress-fill { height: 100%; width: 25%; background: var(--teal); transition: 1s ease; }
 
         .layout { display: flex; gap: 30px; padding: 30px; max-width: 1600px; margin: auto; }
-        
         nav { width: 320px; flex-shrink: 0; }
         .home-btn { 
             background: var(--blue); color: white; padding: 15px; border-radius: 18px; 
             margin-bottom: 20px; cursor: pointer; font-weight: 800; border: none; width: 100%;
             display: flex; align-items: center; gap: 12px; transition: 0.3s;
         }
-        .home-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(40,112,237,0.4); }
 
-        .month-section { margin-bottom: 15px; border-radius: 20px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .month-tab { 
-            padding: 14px 20px; color: white; font-weight: 900; cursor: pointer; 
-            display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;
-        }
-        .week-list { background: white; padding: 5px 0; }
-        .week-item { 
-            padding: 10px 25px; cursor: pointer; font-size: 0.9rem; color: #64748b; 
-            transition: 0.2s; font-weight: 600; display: flex; align-items: center; gap: 8px;
-        }
+        .month-section { margin-bottom: 15px; border-radius: 20px; overflow: hidden; border: 1px solid #e2e8f0; }
+        .month-tab { padding: 14px 20px; color: white; font-weight: 900; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; }
+        .week-item { padding: 10px 25px; cursor: pointer; font-size: 0.9rem; color: #64748b; font-weight: 600; display: flex; align-items: center; gap: 8px; }
         .week-item:hover { color: var(--blue); background: #f8fafc; }
 
         main { flex-grow: 1; }
         .bento { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
-        
-        .card { 
-            background: white; padding: 25px; border-radius: 28px; 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.04); border: 1px solid #f1f5f9; 
-            position: relative; transition: 0.3s ease;
-        }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.08); }
+        .card { background: white; padding: 25px; border-radius: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); border: 1px solid #f1f5f9; transition: 0.3s; }
         .full { grid-column: span 2; }
 
-        .icon-circle { 
-            width: 50px; height: 50px; border-radius: 16px; display: flex; 
-            align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 15px;
-        }
+        .icon-circle { width: 50px; height: 50px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 15px; }
 
         .study-card { border-top: 8px solid var(--blue); }
         .webinar-card { border-top: 8px solid var(--purple); background: #fdfaff; }
         .prezence-card { border-top: 8px solid var(--teal); background: #f7fffe; }
         .praxe-card { border-top: 8px solid var(--orange); background: #fffbf9; }
 
-        .study-item { 
-            background: #f8fafc; padding: 12px 18px; border-radius: 16px; 
-            margin-bottom: 12px; border: 1px solid #e2e8f0; display: flex; align-items: center; gap: 12px;
-        }
+        .info-row { display: flex; margin-bottom: 8px; font-size: 0.95rem; }
+        .info-row b { width: 80px; color: #64748b; }
 
-        .confirm-zone { display: flex; gap: 20px; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto; }
-        .thumb-btn { 
-            flex: 1; padding: 22px; border-radius: 22px; border: 2px solid #e2e8f0; 
-            background: white; cursor: pointer; font-weight: 800; transition: 0.3s;
-            display: flex; flex-direction: column; align-items: center; gap: 10px; color: #64748b;
+        .btn-teams { 
+            background: #464EB8; color: white; padding: 10px 20px; border-radius: 12px; 
+            text-decoration: none; display: inline-flex; align-items: center; gap: 8px; 
+            font-weight: bold; margin-top: 15px; transition: 0.3s;
         }
-        .thumb-btn i { font-size: 1.5rem; }
-        .thumb-btn.on { border-color: #22c55e; background: #f0fdf4; color: #166534; transform: translateY(-3px); box-shadow: 0 4px 10px rgba(34,197,94,0.2); }
+        .btn-teams:hover { background: #3b42a0; transform: scale(1.05); }
+
+        .confirm-zone { display: flex; gap: 20px; margin-top: 20px; max-width: 500px; margin: 20px auto; }
+        .thumb-btn { 
+            flex: 1; padding: 20px; border-radius: 20px; border: 2px solid #e2e8f0; 
+            background: white; cursor: pointer; font-weight: 800; transition: 0.3s;
+            display: flex; flex-direction: column; align-items: center; gap: 8px; color: #64748b;
+        }
+        .thumb-btn.on { border-color: #22c55e; background: #f0fdf4; color: #166534; }
     </style>
 </head>
 <body>
 
 <header>
-    <div style="display:flex; align-items:center; gap:12px;">
-        <div style="background:var(--blue); padding:10px 14px; border-radius:12px; font-weight:900;">ČS</div>
-        <span style="letter-spacing: 1px; font-weight: 800;">ADAPTAČNÍ PORTÁL</span>
-    </div>
+    <div style="font-weight:900;">ČS | ADAPTACE</div>
     <div class="progress-container">
-        <span style="font-size:0.7rem; font-weight:900;">CELKOVÝ POKROK</span>
         <div class="progress-bar-bg"><div id="progress-fill"></div></div>
     </div>
 </header>
@@ -101,10 +82,10 @@
 
 <script>
     const monthData = {
-        1: { name: "ZÁKLADY", color: "var(--blue)", icon: "fa-rocket", focus: "Kultura ČS, základní systémy a digitální nástroje", training: "Vítejte v ČS", milestone: "Smlouva o adaptaci" },
-        2: { name: "ÚVĚRY", color: "var(--teal)", icon: "fa-hand-holding-dollar", focus: "Procesy spotřebitelských úvěrů", training: "Úvěrová akademie", milestone: "Odborná zkouška ZOZ" },
-        3: { name: "POJIŠTĚNÍ", color: "var(--purple)", icon: "fa-shield-heart", focus: "Životní i neživotní pojištění", training: "Pojišťovací specialista", milestone: "Certifikace IDD" },
-        4: { name: "INVESTICE", color: "var(--orange)", icon: "fa-chart-line", focus: "Finanční trhy a investiční plánování", training: "Investiční poradce", milestone: "Zkouška ČNB" }
+        1: { name: "ZÁKLADY", color: "var(--blue)", icon: "fa-rocket" },
+        2: { name: "ÚVĚRY", color: "var(--teal)", icon: "fa-hand-holding-dollar" },
+        3: { name: "POJIŠTĚNÍ", color: "var(--purple)", icon: "fa-shield-heart" },
+        4: { name: "INVESTICE", color: "var(--orange)", icon: "fa-chart-line" }
     };
 
     const weekDetails = {
@@ -112,108 +93,81 @@
             title: "1. týden: Vítej v týmu!",
             study: [
                 { t: "E-learning: Finanční a digitální gramotnost", icon: "fa-graduation-cap" },
-                { t: "E-learning: George", icon: "fa-mobile-screen", tip: "Tip: Otevři si George v mobilu a projdi si funkce zároveň s kurzem." },
-                { t: "Znalostní báze", icon: "fa-book" }
+                { t: "E-learning: George", icon: "fa-mobile-screen" }
             ],
-            webinar: "Středa 10:00 - Úvodní webinář. Ukotvíme si znalosti ze samostudia a projdeme úkoly v pracovním sešitu.",
-            prezence: "Čtvrtek 09:00 - Prezenční den na centrále. Metodické ukotvení v praxi.",
-            praxe: ["Nastavení PC a přístupů", "Choreo pobočky s manažerem", "Nastavení bloku na studium v kalendáři"]
+            webinar: { 
+                cas: "Středa 10:00 - 11:30", 
+                misto: "Online (MS Teams)", 
+                lektor: "Dana Modrá", 
+                odkaz: "https://teams.microsoft.com/l/meetup-join/..." 
+            },
+            prezence: { 
+                cas: "Čtvrtek 09:00 - 16:00", 
+                misto: "Centrála Praha, Budova A", 
+                lektor: "Jan Novák" 
+            },
+            praxe: ["Nastavení PC", "Choreo pobočky"]
         }
     };
 
     function showHome() {
         document.getElementById('main-content').innerHTML = `
-            <div class="card full" style="background:var(--stone); color:white; border:none; padding:40px;">
-                <h1 style="font-size:2.8rem; margin:0;">Ahoj Martine! 👋</h1>
-                <p style="font-size:1.2rem; opacity:0.9; margin-top:15px; max-width: 800px;">
-                    Tvoje cesta adaptací začíná. Na konci 4. měsíce tě čeká <b>Certifikační zkouška</b>. Tento portál tě provede vším podstatným.
-                </p>
-            </div>
-            <div class="bento" style="margin-top:25px;">
-                <div class="card">
-                    <div class="icon-circle" style="background:#eff6ff; color:var(--blue)"><i class="fas fa-address-book"></i></div>
-                    <h3>Důležité kontakty</h3>
-                    <p><b>Manažer:</b> Tvůj hlavní mentor<br><b>IT Support:</b> linka 5555<br><b>Kouč:</b> Dana Modrá</p>
-                </div>
-                <div class="card">
-                    <div class="icon-circle" style="background:#f0fdf4; color:var(--teal)"><i class="fas fa-external-link-alt"></i></div>
-                    <h3>Rychlé odkazy</h3>
-                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-                        <a href="#" style="color:var(--blue); font-weight:700; text-decoration:none;">Intranet</a>
-                        <a href="#" style="color:var(--blue); font-weight:700; text-decoration:none;">LMS</a>
-                        <a href="#" style="color:var(--blue); font-weight:700; text-decoration:none;">Znalostka</a>
-                        <a href="#" style="color:var(--blue); font-weight:700; text-decoration:none;">George</a>
-                    </div>
-                </div>
+            <div class="card full" style="background:var(--stone); color:white;">
+                <h1>Ahoj Martine! 👋</h1>
+                <p>Tvůj průvodce adaptací. Vše na jednom místě.</p>
             </div>
         `;
     }
 
     function showMonth(m) {
-        const d = monthData[m];
         document.getElementById('main-content').innerHTML = `
-            <div class="card full" style="background:${d.color}; color:white; border:none;">
-                <h1><i class="fas ${d.icon}"></i> ${m}. MĚSÍC: ${d.name}</h1>
-                <p style="font-size:1.2rem; opacity:0.9;">Globální přehled toho, co tě v tomto měsíci čeká.</p>
-            </div>
-            <div class="bento" style="margin-top:25px;">
-                <div class="card"><h3>Co tě čeká?</h3><p>${d.focus}</p></div>
-                <div class="card"><h3>Hlavní školení</h3><p>${d.training}</p></div>
-                <div class="card full" style="border: 3px solid ${d.color}; text-align:center;">
-                    <h3 style="color:${d.color}">KLÍČOVÝ MILNÍK MĚSÍCE</h3>
-                    <p style="font-size:1.8rem; font-weight:900;">${d.milestone}</p>
-                </div>
+            <div class="card full" style="background:${monthData[m].color}; color:white;">
+                <h1>${m}. Měsíc: ${monthData[m].name}</h1>
+                <p>Globální přehled milníků a zkoušek.</p>
             </div>
         `;
     }
 
     function loadWeek(n) {
-        const w = weekDetails[n] || { title: "Týden " + n, study: [], webinar: "Bude upřesněno", prezence: "Bude upřesněno", praxe: [] };
+        const w = weekDetails[n] || weekDetails[1];
         document.getElementById('main-content').innerHTML = `
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:25px;">
-                <h2 style="font-size:2rem; color:var(--stone); margin:0;">${w.title}</h2>
-                <button onclick="showHome()" style="background:white; border:1px solid #ddd; padding:8px 15px; border-radius:12px; cursor:pointer; font-weight:800;">DOMŮ</button>
-            </div>
-            
+            <h2 style="margin-bottom:25px; color:var(--stone);">${w.title}</h2>
             <div class="bento">
                 <div class="card full study-card">
                     <div class="icon-circle" style="background:#eff6ff; color:var(--blue)"><i class="fas fa-book-open"></i></div>
                     <h3>Samostudium</h3>
                     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
-                        ${w.study.map(s => `
-                            <div class="study-item">
-                                <i class="fas ${s.icon}" style="color:var(--blue)"></i>
-                                <div>
-                                    <div style="font-weight:800; color:var(--stone);">${s.t}</div>
-                                    ${s.tip ? `<small style="color:#64748b; font-style:italic;">${s.tip}</small>` : ''}
-                                </div>
-                            </div>
-                        `).join('')}
+                        ${w.study.map(s => `<div style="background:#f8fafc; padding:12px; border-radius:12px; font-weight:700;">• ${s.t}</div>`).join('')}
                     </div>
                 </div>
 
                 <div class="card webinar-card">
                     <div class="icon-circle" style="background:#f5f3ff; color:var(--purple)"><i class="fas fa-video"></i></div>
                     <h3>Ověřovací webinář</h3>
-                    <p>${w.webinar}</p>
+                    <div class="info-row"><b>ČAS:</b> <span>${w.webinar.cas}</span></div>
+                    <div class="info-row"><b>MÍSTO:</b> <span>${w.webinar.misto}</span></div>
+                    <div class="info-row"><b>LEKTOR:</b> <span>${w.webinar.lektor}</span></div>
+                    <a href="${w.webinar.odkaz}" class="btn-teams"><i class="fab fa-microsoft"></i> Připojit se k webináři</a>
                 </div>
 
                 <div class="card prezence-card">
                     <div class="icon-circle" style="background:#f0fdf4; color:var(--teal)"><i class="fas fa-users"></i></div>
                     <h3>Prezenční den</h3>
-                    <p>${w.prezence}</p>
+                    <div class="info-row"><b>ČAS:</b> <span>${w.prezence.cas}</span></div>
+                    <div class="info-row"><b>MÍSTO:</b> <span>${w.prezence.misto}</span></div>
+                    <div class="info-row"><b>LEKTOR:</b> <span>${w.prezence.lektor}</span></div>
                 </div>
 
                 <div class="card full praxe-card">
                     <div class="icon-circle" style="background:#fff7ed; color:var(--orange)"><i class="fas fa-briefcase"></i></div>
                     <h3>Co si zkusit v praxi</h3>
-                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-                        ${w.praxe.map(p => `<div style="background:white; padding:12px; border-radius:12px; border:1px solid #fed7aa; font-weight:600;">• ${p}</div>`).join('')}
+                    <div style="display:flex; gap:10px;">
+                        ${w.praxe.map(p => `<div style="background:white; padding:10px 15px; border-radius:12px; border:1px solid #fed7aa; font-weight:600;">${p}</div>`).join('')}
                     </div>
                 </div>
 
-                <div class="card full" style="text-align:center;">
-                    <h3 style="margin-bottom:20px;">Potvrzení týdne</h3>
+                <div class="card full" style="text-align:center; background:#f8fafc;">
+                    <h3 style="margin-bottom:20px;">Potvrzení splnění týdne</h3>
                     <div class="confirm-zone">
                         <div class="thumb-btn" onclick="this.classList.toggle('on')"><i class="fas fa-user-tie"></i> MANAŽER</div>
                         <div class="thumb-btn" onclick="this.classList.toggle('on')"><i class="fas fa-user-check"></i> MARTIN</div>
@@ -230,14 +184,10 @@
             section.className = 'month-section';
             section.innerHTML = `
                 <div class="month-tab" style="background:${monthData[m].color}" onclick="showMonth(${m})">
-                    <span>${m}. MĚSÍC: ${monthData[m].name}</span>
-                    <i class="fas fa-chevron-right"></i>
+                    <span>${m}. MĚSÍC: ${monthData[m].name}</span><i class="fas fa-chevron-right"></i>
                 </div>
                 <div class="week-list">
-                    ${[1,2,3,4].map(w => {
-                        const wn = ((m-1)*4)+w;
-                        return `<div class="week-item" onclick="loadWeek(${wn})"><i class="fas fa-calendar-day" style="font-size:0.75rem;"></i> Týden ${wn}</div>`;
-                    }).join('')}
+                    ${[1,2,3,4].map(w => `<div class="week-item" onclick="loadWeek(${((m-1)*4)+w})">Týden ${((m-1)*4)+w}</div>`).join('')}
                 </div>
             `;
             menu.appendChild(section);
