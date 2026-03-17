@@ -7,130 +7,154 @@
     <style>
         :root { 
             --blue: #2870ED; --stone: #245375; --teal: #02A3A4; --orange: #FF6130; 
-            --purple: #6c5ce7; --gold: #f1c40f; --bg: #f4f7f9; 
+            --purple: #6c5ce7; --gold: #f1c40f; --bg: #f0f2f5; 
         }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); color: #2d3436; }
+        body { font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; background: var(--bg); color: #1e293b; }
         
-        header { background: var(--stone); color: white; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .progress-container { text-align: right; }
-        .progress-bar-bg { width: 200px; height: 10px; background: rgba(255,255,255,0.2); border-radius: 5px; margin-top: 5px; }
-        #progress-fill { height: 100%; width: 0%; background: var(--teal); border-radius: 5px; transition: 1s; }
+        /* Header s hloubkou */
+        header { 
+            background: linear-gradient(135deg, var(--stone), #334155); 
+            color: white; padding: 1.2rem 5%; display: flex; justify-content: space-between; 
+            align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .progress-container { text-align: right; width: 250px; }
+        .progress-bar-bg { height: 12px; background: rgba(255,255,255,0.2); border-radius: 20px; margin-top: 6px; overflow: hidden; }
+        #progress-fill { height: 100%; width: 15%; background: var(--teal); box-shadow: 0 0 10px var(--teal); transition: 1s ease; }
 
-        .layout { display: flex; gap: 25px; padding: 25px; max-width: 1600px; margin: auto; }
+        .layout { display: flex; gap: 30px; padding: 30px; max-width: 1600px; margin: auto; }
+        
+        /* Menu s hravými barvami */
         nav { width: 320px; flex-shrink: 0; }
-        
-        .nav-btn { padding: 15px; border-radius: 12px; margin-bottom: 15px; cursor: pointer; font-weight: bold; border: none; width: 100%; text-align: left; display: flex; align-items: center; gap: 10px; transition: 0.3s; }
-        .home-link { background: var(--blue); color: white; }
-        
-        .month-box { background: white; border-radius: 15px; margin-bottom: 15px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .month-head { padding: 12px; color: white; font-weight: 900; cursor: pointer; display: flex; justify-content: space-between; font-size: 0.8rem; }
-        .m1 { background: var(--blue); } .m2 { background: var(--teal); } .m3 { background: var(--purple); } .m4 { background: var(--orange); }
-        
-        .week-link { padding: 10px 20px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.9rem; transition: 0.2s; }
-        .week-link:hover { background: #f0f4f8; padding-left: 25px; }
-        .week-link.active { background: #eef2f7; color: var(--blue); border-left: 5px solid var(--blue); font-weight: bold; }
+        .nav-card { background: white; border-radius: 24px; padding: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .home-btn { 
+            background: var(--blue); color: white; padding: 15px; border-radius: 18px; 
+            margin-bottom: 20px; cursor: pointer; font-weight: 800; border: none; width: 100%;
+            display: flex; align-items: center; gap: 12px; transition: 0.3s;
+        }
+        .home-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(40,112,237,0.4); }
 
+        .month-section { margin-bottom: 15px; border-radius: 20px; overflow: hidden; border: 1px solid #e2e8f0; }
+        .month-tab { 
+            padding: 14px 20px; color: white; font-weight: 900; cursor: pointer; 
+            display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;
+        }
+        .week-list { background: white; padding: 5px 0; }
+        .week-item { 
+            padding: 10px 25px; cursor: pointer; font-size: 0.9rem; color: #64748b; 
+            transition: 0.2s; font-weight: 600; display: flex; align-items: center; gap: 8px;
+        }
+        .week-item:hover { color: var(--blue); background: #f8fafc; }
+        .week-item.active { color: var(--blue); background: #eff6ff; border-left: 4px solid var(--blue); }
+
+        /* Hlavní plocha - dlaždice */
         main { flex-grow: 1; }
-        .bento { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .card { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e1e8ed; transition: 0.3s; }
-        .card:hover { transform: translateY(-3px); }
+        .bento { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+        
+        .card { 
+            background: white; padding: 25px; border-radius: 28px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04); border: 1px solid #f1f5f9; 
+            position: relative; transition: 0.3s ease;
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.08); }
         .full { grid-column: span 2; }
-        
-        /* Barvy dlaždic podle typu */
-        .c-study { border-top: 6px solid var(--blue); }
-        .c-webinar { border-top: 6px solid var(--purple); background: #f9f8ff; }
-        .c-prezence { border-top: 6px solid var(--teal); background: #f6fffe; }
-        .c-praxe { border-top: 6px solid var(--orange); background: #fffaf9; }
-        
-        .icon-circ { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; color: white; }
-        
-        .info-tag { background: #fff3cd; padding: 10px; border-radius: 10px; font-size: 0.85rem; border-left: 4px solid #ffc107; margin-top: 10px; }
-        .check-item { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 0.95rem; }
-        .check-item i { color: #ccc; }
-        
-        .thumb-group { display: flex; gap: 10px; margin-top: 15px; }
-        .thumb { flex: 1; padding: 15px; text-align: center; border-radius: 10px; border: 2px solid #eee; cursor: pointer; font-weight: bold; font-size: 0.8rem; }
-        .thumb.on { background: #e8f5e9; border-color: #4caf50; color: #2e7d32; }
-        
-        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
-        .contact-item { background: #f8f9fa; padding: 10px; border-radius: 8px; font-size: 0.85rem; border: 1px solid #eee; }
+
+        /* Stylizace ikon v dlaždicích */
+        .icon-circle { 
+            width: 50px; height: 50px; border-radius: 16px; display: flex; 
+            align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 15px;
+        }
+
+        /* Specifické barvy dlaždic */
+        .study-card { border-top: 8px solid var(--blue); }
+        .webinar-card { border-top: 8px solid var(--purple); background: #fdfaff; }
+        .prezence-card { border-top: 8px solid var(--teal); background: #f7fffe; }
+        .praxe-card { border-top: 8px solid var(--orange); background: #fffbf9; }
+
+        .study-item { 
+            background: #f8fafc; padding: 12px 18px; border-radius: 16px; 
+            margin-bottom: 12px; border: 1px solid #e2e8f0; display: flex; align-items: center; gap: 12px;
+        }
+        .study-item i { color: var(--blue); font-size: 1.2rem; }
+
+        /* Potvrzovací tlačítka */
+        .confirm-zone { display: flex; gap: 15px; margin-top: 20px; }
+        .thumb-btn { 
+            flex: 1; padding: 18px; border-radius: 18px; border: 2px solid #e2e8f0; 
+            background: white; cursor: pointer; font-weight: 800; transition: 0.3s;
+            display: flex; flex-direction: column; align-items: center; gap: 8px; color: #94a3b8;
+        }
+        .thumb-btn.on { border-color: #22c55e; background: #f0fdf4; color: #166534; transform: scale(1.02); }
     </style>
 </head>
 <body>
 
 <header>
-    <div style="font-weight: 900; font-size: 1.2rem;">ČESKÁ SPOŘITELNA | ADAPTACE</div>
+    <div style="display:flex; align-items:center; gap:12px;">
+        <div style="background:var(--blue); padding:10px 14px; border-radius:12px; font-weight:900;">ČS</div>
+        <span style="letter-spacing: 1px; font-weight: 800;">ADAPTAČNÍ PORTÁL</span>
+    </div>
     <div class="progress-container">
-        <span style="font-size: 0.7rem; font-weight: bold;">TVŮJ POKROK</span>
+        <span style="font-size:0.7rem; font-weight:900;">TVŮJ POKROK V ADAPTACI</span>
         <div class="progress-bar-bg"><div id="progress-fill"></div></div>
     </div>
 </header>
 
 <div class="layout">
     <nav>
-        <button class="nav-btn home-link" onclick="showHome()"><i class="fas fa-home"></i> DOMOVSKÁ STRÁNKA</button>
+        <button class="home-btn" onclick="showHome()"><i class="fas fa-house"></i> ÚVODNÍ STRANA</button>
         <div id="menu"></div>
-        <button class="nav-btn" style="background:var(--stone); color:white; border: 2px solid var(--gold); margin-top:10px;" onclick="showCert()"><i class="fas fa-medal"></i> CERTIFIKAČNÍ ZKOUŠKA</button>
     </nav>
     <main id="main-content"></main>
 </div>
 
 <script>
-    const weekData = {
-        1: {
-            title: "1. Týden: Startujeme",
-            study: [
-                { t: "E-learning Finanční a digitální gramotnost", icon: "fa-graduation-cap" },
-                { t: "E-learning George", icon: "fa-mobile-screen", info: "Pokud máš George v mobilu, otevři si ho a zkoušej si orientaci přímo v něm." },
-                { t: "E-learning Znalostka", icon: "fa-book", link: "https://znalostka.csas.cz" }
-            ],
-            webinar: "Středa 10:00 - Úvod do systémů. Metodicky si ukotvíme informace ze samostudia a z úkolů v pracovním sešitu.",
-            prezence: "Čtvrtek 09:00 - Vítejte v ČS. Interaktivní den na centrále.",
-            praxe: ["Nastavení techniky a přístupů", "Choreo pobočky s manažerem", "Nastavení bloku na studium v kalendáři"]
-        },
-        2: {
-            title: "2. Týden: Komunikace",
-            study: [
-                { t: "Index 1 - Doporučené minimum", icon: "fa-list-check" },
-                { t: "Základy profesionální komunikace", icon: "fa-comments" },
-                { t: "Od servisu k poradenství", icon: "fa-arrow-trend-up" }
-            ],
-            webinar: "Úterý 13:00 - Jak na 5* servis v praxi.",
-            prezence: "Pátek 09:00 - Komunikační trénink.",
-            praxe: ["Stínování u pokladny", "Nácvik vítání klienta", "Práce s pracovním sešitem - kapitola Komunikace"]
-        }
+    const monthData = {
+        1: { name: "ZÁKLADY", color: "var(--blue)", icon: "fa-rocket", focus: "Systémy, George a kultura České spořitelny", training: "Vítejte v ČS (Prezenčně)", milestone: "Smlouva o adaptaci" },
+        2: { name: "ÚVĚRY", color: "var(--teal)", icon: "fa-hand-holding-dollar", focus: "Spotřebitelské úvěry a procesy", training: "Úvěrový specialista", milestone: "Odborná zkouška ZOZ" },
+        3: { name: "POJIŠTĚNÍ", color: "var(--purple)", icon: "fa-shield-heart", focus: "Životní a neživotní pojištění", training: "Pojišťovací poradce", milestone: "Certifikace IDD" },
+        4: { name: "INVESTICE", color: "var(--orange)", icon: "fa-chart-line", focus: "Fondy, trhy a poradenství", training: "Investiční specialista", milestone: "Certifikace u ČNB" }
     };
 
-    const monthOverviews = {
-        1: { label: "ZÁKLADY", focus: "Kultura, systémy a George", training: "Vítejte v ČS", milestone: "Smlouva o adaptaci" },
-        2: { label: "ÚVĚRY", focus: "Spotřebitelské úvěry", training: "Úvěrový specialista", milestone: "Odborná zkouška ZOZ" },
-        3: { label: "POJIŠTĚNÍ", focus: "Životní a neživotní pojištění", training: "Zprostředkovatel pojištění", milestone: "Zkouška IDD" },
-        4: { label: "INVESTICE", focus: "Fondy a cenné papíry", training: "Investiční poradenství", milestone: "Certifikace ČNB" }
+    const weekDetails = {
+        1: {
+            title: "1. týden: Vítej v týmu!",
+            study: [
+                { t: "E-learning: Finanční a digitální gramotnost", icon: "fa-graduation-cap" },
+                { t: "E-learning: George", icon: "fa-mobile-screen", tip: "Tip: Otevři si George v mobilu a projdi si funkce zároveň s kurzem." },
+                { t: "Znalostní báze", icon: "fa-book", link: "#" }
+            ],
+            webinar: "Středa 10:00 - Úvodní webinář. Ukotvíme si znalosti ze samostudia a projdeme pracovní sešit.",
+            prezence: "Čtvrtek 09:00 - Prezenční den na centrále. Seznámení a networking.",
+            praxe: ["Nastavení PC a přístupů", "Choreo pobočky s manažerem", "První zápis do deníku adaptace"]
+        }
     };
 
     function showHome() {
         document.getElementById('main-content').innerHTML = `
-            <div class="card full" style="background:linear-gradient(135deg, var(--stone), #4b6584); color:white; border:none;">
-                <h1 style="margin:0;">Ahoj Martine! 👋</h1>
-                <p style="opacity:0.9; margin-top:10px;">Na konci 4. měsíce tě čeká velký finále – Certifikační zkouška. Tento portál ti pomůže s přípravou. A když se k tomu přidá podpora manažera a tvůj zájem a aktivita, tak ji zvládneš levou zadní.</p>
+            <div class="card full" style="background:var(--stone); color:white; border:none; padding:40px;">
+                <h1 style="font-size:2.8rem; margin:0;">Ahoj Martine! 👋</h1>
+                <p style="font-size:1.2rem; opacity:0.9; margin-top:15px; max-width: 800px;">
+                    Na konci 4. měsíce tě čeká velký finále – <b>Certifikační zkouška</b>. Tento portál ti pomůže s přípravou. S podporou manažera a tvou aktivitou to zvládneš levou zadní!
+                </p>
             </div>
-            <div class="bento" style="margin-top:20px;">
+            <div class="bento" style="margin-top:25px;">
                 <div class="card">
-                    <h3><i class="fas fa-address-book" style="color:var(--blue)"></i> Důležité kontakty</h3>
-                    <div class="contact-grid">
-                        <div class="contact-item"><b>Manažer:</b> Tvůj přímý nadřízený</div>
-                        <div class="contact-item"><b>Kouč:</b> Dana Modrá</div>
-                        <div class="contact-item"><b>IT Support:</b> linka 5555</div>
-                        <div class="contact-item"><b>LMS Help:</b> podpora@csas.cz</div>
+                    <div class="icon-circle" style="background:#eff6ff; color:var(--blue)"><i class="fas fa-phone"></i></div>
+                    <h3>Důležité kontakty</h3>
+                    <div style="font-size:0.9rem; line-height:2;">
+                        <b>Manažer:</b> Tvůj hlavní parťák<br>
+                        <b>Kouč:</b> Dana Modrá (dana.modra@csas.cz)<br>
+                        <b>IT Support:</b> linka 5555
                     </div>
                 </div>
                 <div class="card">
-                    <h3><i class="fas fa-link" style="color:var(--teal)"></i> Důležité odkazy</h3>
-                    <div class="contact-grid">
-                        <div class="contact-item"><a href="#">Intranet ČS</a></div>
-                        <div class="contact-item"><a href="#">Znalostní báze</a></div>
-                        <div class="contact-item"><a href="#">LMS Vzdělávání</a></div>
-                        <div class="contact-item"><a href="#">George Desktop</a></div>
+                    <div class="icon-circle" style="background:#f0fdf4; color:var(--teal)"><i class="fas fa-link"></i></div>
+                    <h3>Rychlé odkazy</h3>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                        <a href="#" style="color:var(--blue); font-weight:700; text-decoration:none;">Intranet ČS</a>
+                        <a href="#" style="color:var(--blue); font-weight:700; text-decoration:none;">LMS Vzdělávání</a>
+                        <a href="#" style="color:var(--blue); font-weight:700; text-decoration:none;">Znalostka</a>
+                        <a href="#" style="color:var(--blue); font-weight:700; text-decoration:none;">George Desktop</a>
                     </div>
                 </div>
             </div>
@@ -138,69 +162,76 @@
     }
 
     function showMonth(m) {
-        const o = monthOverviews[m];
+        const d = monthData[m];
         document.getElementById('main-content').innerHTML = `
-            <div class="card full" style="background:var(--stone); color:white;">
-                <h1>${m}. Měsíc: ${o.label}</h1>
-                <p>Globální přehled aktivit a cílů.</p>
+            <div class="card full" style="background:${d.color}; color:white; border:none;">
+                <h1><i class="fas ${d.icon}"></i> ${m}. MĚSÍC: ${d.name}</h1>
+                <p style="font-size:1.2rem; opacity:0.9;">Pohled na tvé hlavní úkoly v tomto měsíci.</p>
             </div>
-            <div class="bento" style="margin-top:20px;">
-                <div class="card"><h3>Co mě čeká?</h3><p>${o.focus}</p></div>
-                <div class="card"><h3>Hlavní školení</h3><p>${o.training}</p></div>
-                <div class="card full" style="border: 2px solid var(--gold); background: #fffdf0;">
-                    <h3>Klíčový milník měsíce</h3>
-                    <p style="font-size:1.5rem; font-weight:bold; color:var(--stone);">${o.milestone}</p>
+            <div class="bento" style="margin-top:25px;">
+                <div class="card"><h3>Co tě čeká?</h3><p>${d.focus}</p></div>
+                <div class="card"><h3>Hlavní školení</h3><p>${d.training}</p></div>
+                <div class="card full" style="border: 3px solid ${d.color}; text-align:center;">
+                    <h3 style="color:${d.color}">KLÍČOVÝ MILNÍK MĚSÍCE</h3>
+                    <p style="font-size:1.8rem; font-weight:900;">${d.milestone}</p>
                 </div>
             </div>
         `;
     }
 
     function loadWeek(n) {
-        const w = weekData[n] || { title: "Týden "+n, study:[], praxe:[] };
+        const w = weekDetails[n] || { title: "Týden " + n, study: [], webinar: "Bude upřesněno", prezence: "Bude upřesněno", praxe: [] };
         document.getElementById('main-content').innerHTML = `
-            <h2 style="margin-bottom:20px; color:var(--stone);">${w.title}</h2>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:25px;">
+                <h2 style="font-size:2rem; color:var(--stone); margin:0;">${w.title}</h2>
+                <button onclick="showHome()" style="background:white; border:1px solid #ddd; padding:8px 15px; border-radius:12px; cursor:pointer; font-weight:800;">ZPĚT NA ÚVOD</button>
+            </div>
+            
             <div class="bento">
-                <div class="card full c-study">
-                    <div class="icon-circ" style="background:var(--blue)"><i class="fas fa-book-open"></i></div>
+                <div class="card full study-card">
+                    <div class="icon-circle" style="background:#eff6ff; color:var(--blue)"><i class="fas fa-book-open"></i></div>
                     <h3>Samostudium</h3>
                     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
                         ${w.study.map(s => `
-                            <div>
-                                <div class="check-item"><i class="fas fa-circle-check"></i> 
-                                    ${s.link ? `<a href="${s.link}" target="_blank"><b>${s.t}</b></a>` : `<b>${s.t}</b>`}
+                            <div class="study-item">
+                                <i class="fas ${s.icon}"></i>
+                                <div>
+                                    <div style="font-weight:800; color:var(--stone);">${s.t}</div>
+                                    ${s.tip ? `<small style="color:#64748b; font-style:italic;">${s.tip}</small>` : ''}
                                 </div>
-                                ${s.info ? `<div class="info-tag"><i class="fas fa-lightbulb"></i> ${s.info}</div>` : ''}
                             </div>
                         `).join('')}
                     </div>
                 </div>
 
-                <div class="card c-webinar">
-                    <div class="icon-circ" style="background:var(--purple)"><i class="fas fa-video"></i></div>
+                <div class="card webinar-card">
+                    <div class="icon-circle" style="background:#f5f3ff; color:var(--purple)"><i class="fas fa-video"></i></div>
                     <h3>Ověřovací webinář</h3>
-                    <p style="font-size:0.9rem;">${w.webinar}</p>
+                    <p style="font-size:0.95rem; line-height:1.6;">${w.webinar}</p>
+                    <div style="margin-top:10px; font-size:0.8rem; color:var(--purple); font-weight:800;">Ukotvení znalostí a pracovní sešit</div>
                 </div>
 
-                <div class="card c-prezence">
-                    <div class="icon-circ" style="background:var(--teal)"><i class="fas fa-users"></i></div>
+                <div class="card prezence-card">
+                    <div class="icon-circle" style="background:#f0fdf4; color:var(--teal)"><i class="fas fa-users"></i></div>
                     <h3>Prezenční den</h3>
-                    <p style="font-size:0.9rem;">${w.prezence}</p>
+                    <p style="font-size:0.95rem; line-height:1.6;">${w.prezence}</p>
+                    <div style="margin-top:10px; font-size:0.8rem; color:var(--teal); font-weight:800;">Osobní setkání a nácvik</div>
                 </div>
 
-                <div class="card full c-praxe">
-                    <div class="icon-circ" style="background:var(--orange)"><i class="fas fa-briefcase"></i></div>
+                <div class="card full praxe-card">
+                    <div class="icon-circle" style="background:#fff7ed; color:var(--orange)"><i class="fas fa-briefcase"></i></div>
                     <h3>Co si zkusit v praxi</h3>
-                    <ul style="margin:0; padding-left:20px;">
-                        ${w.praxe.map(p => `<li style="margin-bottom:8px;">${p}</li>`).join('')}
-                    </ul>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                        ${w.praxe.map(p => `<div style="background:white; padding:12px; border-radius:12px; border:1px solid #fed7aa; font-weight:600;">• ${p}</div>`).join('')}
+                    </div>
                 </div>
 
                 <div class="card full" style="text-align:center;">
-                    <h3>Potvrzení splnění týdne</h3>
-                    <div class="thumb-group">
-                        <div class="thumb" onclick="this.classList.toggle('on')">MANAŽER</div>
-                        <div class="thumb" onclick="this.classList.toggle('on')">KOUČ</div>
-                        <div class="thumb" onclick="this.classList.toggle('on')">MARTIN</div>
+                    <h3 style="margin-bottom:20px;">Potvrzení splnění týdne</h3>
+                    <div class="confirm-zone">
+                        <div class="thumb-btn" onclick="this.classList.toggle('on')"><i class="fas fa-user-tie fa-lg"></i> MANAŽER</div>
+                        <div class="thumb-btn" onclick="this.classList.toggle('on')"><i class="fas fa-chalkboard-user fa-lg"></i> KOUČ</div>
+                        <div class="thumb-btn" onclick="this.classList.toggle('on')"><i class="fas fa-user-check fa-lg"></i> MARTIN</div>
                     </div>
                 </div>
             </div>
@@ -209,28 +240,23 @@
 
     function buildMenu() {
         const menu = document.getElementById('menu');
-        const months = ["ZÁKLADY", "ÚVĚRY", "POJIŠTĚNÍ", "INVESTICE"];
         for(let m=1; m<=4; m++) {
-            const group = document.createElement('div');
-            group.className = 'month-box';
-            group.innerHTML = `<div class="month-head m${m}" onclick="showMonth(${m})">
-                <span>${m}. MĚSÍC: ${months[m-1]}</span>
-                <i class="fas fa-chevron-right"></i>
-            </div>`;
-            for(let w=1; w<=4; w++) {
-                const wn = ((m-1)*4)+w;
-                const div = document.createElement('div');
-                div.className = 'week-link';
-                div.innerText = 'Týden ' + wn;
-                div.onclick = () => loadWeek(wn);
-                group.appendChild(div);
-            }
-            menu.appendChild(group);
+            const section = document.createElement('div');
+            section.className = 'month-section';
+            section.innerHTML = `
+                <div class="month-tab" style="background:${monthData[m].color}" onclick="showMonth(${m})">
+                    <span>${m}. MĚSÍC: ${monthData[m].name}</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="week-list">
+                    ${[1,2,3,4].map(w => {
+                        const wn = ((m-1)*4)+w;
+                        return `<div class="week-item" onclick="loadWeek(${wn})"><i class="fas fa-calendar-day" style="font-size:0.7rem;"></i> Týden ${wn}</div>`;
+                    }).join('')}
+                </div>
+            `;
+            menu.appendChild(section);
         }
-    }
-
-    function showCert() {
-        document.getElementById('main-content').innerHTML = `<div class="card full"><h1>Certifikační zkouška</h1><p>Všechny informace k finální zkoušce budou zde.</p></div>`;
     }
 
     buildMenu();
